@@ -7,6 +7,12 @@ using Microsoft.JSInterop;
 
 namespace Blazorade.Bootstrap.Components
 {
+    /// <summary>
+    /// The Alert component is used to provide feedback messages, typically in response to user actions.
+    /// </summary>
+    /// <remarks>
+    /// For details see https://github.com/Blazorade/Blazorade-Bootstrap/wiki/Alert
+    /// </remarks>
     public partial class Alert
     {
 
@@ -36,9 +42,15 @@ namespace Blazorade.Bootstrap.Components
         [Parameter]
         public string Heading { get; set; }
 
+        /// <summary>
+        /// Specifies whether the user can dismiss the alert.
+        /// </summary>
         [Parameter]
         public bool IsDismissible { get; set; }
 
+        /// <summary>
+        /// Specifies whether the alert should fade when dismissed.
+        /// </summary>
         [Parameter]
         public bool FadeOnDismiss { get; set; }
 
@@ -70,7 +82,7 @@ namespace Blazorade.Bootstrap.Components
                 throw new InvalidOperationException("Cannot dismiss an Alert if the IsDismissible property is false.");
             }
 
-            await this.JsInterop.Alert().DismissAsync(this.Id);
+            await this.JsInterop.InvokeVoidAsync(JsFunctions.Alert.Dismiss, $"#{this.Id}");
         }
 
 
@@ -92,6 +104,8 @@ namespace Blazorade.Bootstrap.Components
             await this.OnDismissed.InvokeAsync(this);
         }
 
+        /// <summary>
+        /// </summary>
         protected override void OnParametersSet()
         {
             this.AddClasses(ClassNames.Alerts.Alert);
@@ -111,6 +125,8 @@ namespace Blazorade.Bootstrap.Components
             if(this.IsDismissible) this.SetIdIfEmpty();
         }
 
+        /// <summary>
+        /// </summary>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
