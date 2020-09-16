@@ -1723,7 +1723,7 @@
         </member>
         <member name="P:Blazorade.Bootstrap.Components.Carousel.SlideCount">
             <summary>
-            Returns the number of slides currenty loaded into the carousel.
+            Returns the number of slides currently loaded into the carousel.
             </summary>
         </member>
         <member name="P:Blazorade.Bootstrap.Components.Carousel.TransitionType">
