@@ -1,36 +1,36 @@
 ﻿@inherits BootstrapComponentBase
 
 @{
-    string innerClasses = $"{ClassNames.Carousels.Inner} h-100";
+	string innerClasses = $"{ClassNames.Carousels.Inner} h-100";
 }
 
 <div @attributes="this.Attributes">
-    @if (this.ShowIndicators)
-    {
-        <ol class="@ClassNames.Carousels.Indicators">
-            @for (int i = 0; i < this.SlideCount; i++)
-            {
-                <li data-target="#@this.Id" data-slide-to="@i" class="@(this.CurrentSlideIndex == i ? "active": "")"></li>
-            }
-        </ol>
-    }
-    <Div class="@innerClasses">
-        @if (null != this.ImageUrls)
-        {
-            @for (var i = 0; i < this.ImageUrls.Count(); i++)
-            {
-                <CarouselItem ImageUrl="@this.ImageUrls.ElementAt(i)" />
-            }
-        }
-        else
-        {
-            @this.ChildContent
-        }
-    </Div>
+	@if (this.ShowIndicators)
+	{
+		<ol class="@ClassNames.Carousels.Indicators">
+			@for (int i = 0; i < this.SlideCount; i++)
+			{
+				<li data-target="#@this.Id" data-slide-to="@i" class="@(this.CurrentSlideIndex == i ? "active": "")"></li>
+			}
+		</ol>
+	}
+	<Div class="@innerClasses">
+		@if (null != this.ImageUrls)
+		{
+			@for (var i = 0; i < this.ImageUrls.Count(); i++)
+			{
+				<CarouselItem ImageUrl="@this.ImageUrls.ElementAt(i)" class="@(this.CurrentSlideIndex == i ? "active": "")" />
+			}
+		}
+		else
+		{
+			@this.ChildContent
+		}
+	</Div>
 
-    @if (this.ShowControls)
-    {
-        <CarouselControl Direction="CarouselControlDirection.Previous" Carousel="@this"></CarouselControl>
-        <CarouselControl Direction="CarouselControlDirection.Next" Carousel="@this"></CarouselControl>
-    }
+	@if (this.ShowControls)
+	{
+		<CarouselControl Direction="CarouselControlDirection.Previous" Carousel="@this"></CarouselControl>
+		<CarouselControl Direction="CarouselControlDirection.Next" Carousel="@this"></CarouselControl>
+	}
 </div>
