@@ -41,8 +41,6 @@ namespace Blazorade.Bootstrap.Forms
 
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			int seq = 0;
-
 			// Open Input Group
 			BuildRenderTreeInputGroupOpen(builder);
 
@@ -52,27 +50,27 @@ namespace Blazorade.Bootstrap.Forms
 			// File Input. Indenting to make the <div></div> block clear.
 			{
 				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "custom-file");
+				builder.OpenElement(0, "div");
+				builder.AddAttribute(1, "class", "custom-file");
 
 				// Input
 				// < input type = "file" @ref = "inputFileElement" @attributes = "UnmatchedParameters" />
-				builder.OpenElement(seq++, "input");
-				builder.AddMultipleAttributes(seq++, Attributes);
-				builder.AddAttribute(seq++, "type", "file");
+				builder.OpenElement(2, "input");
+				builder.AddMultipleAttributes(3, Attributes);
+				builder.AddAttribute(4, "type", "file");
 
 				//builder.AddAttribute(seq++, "onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, NotifyChange));
 
 				// Create an ElementReference suitable for use in JSInterop
-				builder.AddElementReferenceCapture(seq++, (__value) => inputFileElement = __value);
+				builder.AddElementReferenceCapture(5, (__value) => inputFileElement = __value);
 
 				builder.CloseElement();
 
 				// Label
-				builder.OpenElement(seq++, "label");
-				builder.AddAttribute(seq++, "class", ScreenReaderOnly ? "sr-only custom-file-label" : "custom-file-label");
-				builder.AddAttribute(seq++, "for", $"{Id}");
-				builder.AddContent(seq++, Label);
+				builder.OpenElement(6, "label");
+				builder.AddAttribute(7, "class", ScreenReaderOnly ? "sr-only custom-file-label" : "custom-file-label");
+				builder.AddAttribute(8, "for", $"{Id}");
+				builder.AddContent(9, Label);
 				builder.CloseElement();
 
 				// /Div

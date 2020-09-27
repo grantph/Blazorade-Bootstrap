@@ -9,8 +9,6 @@ namespace Blazorade.Bootstrap.Forms
 	{
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			int seq = 0;
-
 			// Label
 			BuildRenderTreeLabel(builder);
 
@@ -22,26 +20,26 @@ namespace Blazorade.Bootstrap.Forms
 				case TextBoxMode.SingleLine:
 					{
 						// Input
-						builder.OpenElement(seq++, "input");
-						builder.AddMultipleAttributes(seq++, this.Attributes);
-						builder.AddAttribute(seq++, "class", CssClass); // Overwrite Attributes["class"]
-						builder.AddAttribute(seq++, "value", BindConverter.FormatValue(CurrentValue));
+						builder.OpenElement(0, "input");
+						builder.AddMultipleAttributes(1, this.Attributes);
+						builder.AddAttribute(2, "class", CssClass); // Overwrite Attributes["class"]
+						builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValue));
 
 						// Disabled?
-						if (Disabled ?? false) builder.AddAttribute(seq++, "disabled", string.Empty);
+						if (Disabled ?? false) builder.AddAttribute(4, "disabled", string.Empty);
 
 						// Help
-						if (HasHelp) builder.AddAttribute(seq++, "aria-describedby", $"{Id}-help");
+						if (HasHelp) builder.AddAttribute(5, "aria-describedby", $"{Id}-help");
 
 						// OnChange
-						builder.AddAttribute(seq++, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+						builder.AddAttribute(6, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 
 						// OnClick
-						if (ClearOnClick) builder.AddAttribute(seq++, "onclick", $"return textBox.clearValue('{Id}')");
-						else if (SelectOnClick) builder.AddAttribute(seq++, "onclick", $"return textBox.selectValue('{Id}')");
+						if (ClearOnClick) builder.AddAttribute(7, "onclick", $"return textBox.clearValue('{Id}')");
+						else if (SelectOnClick) builder.AddAttribute(8, "onclick", $"return textBox.selectValue('{Id}')");
 
 						// OnBlur
-						if (OnBlur.HasDelegate) builder.AddAttribute(seq++, "onblur", EventCallback.Factory.Create(this, this.OnBlurAsync));
+						if (OnBlur.HasDelegate) builder.AddAttribute(9, "onblur", EventCallback.Factory.Create(this, this.OnBlurAsync));
 
 						builder.CloseElement();
 					}
@@ -50,26 +48,26 @@ namespace Blazorade.Bootstrap.Forms
 				case TextBoxMode.MultiLine:
 					{
 						// Input
-						builder.OpenElement(seq++, "textarea");
-						builder.AddMultipleAttributes(seq++, this.Attributes);
-						builder.AddAttribute(seq++, "class", CssClass); // Overwrite Attributes["class"]
-						builder.AddAttribute(seq++, "value", BindConverter.FormatValue(CurrentValue));
+						builder.OpenElement(10, "textarea");
+						builder.AddMultipleAttributes(11, this.Attributes);
+						builder.AddAttribute(12, "class", CssClass); // Overwrite Attributes["class"]
+						builder.AddAttribute(13, "value", BindConverter.FormatValue(CurrentValue));
 
 						// Disabled?
-						if (Disabled ?? false) builder.AddAttribute(seq++, "disabled", string.Empty);
+						if (Disabled ?? false) builder.AddAttribute(14, "disabled", string.Empty);
 
 						// Help
-						if (HasHelp) builder.AddAttribute(seq++, "aria-describedby", $"{Id}-help");
+						if (HasHelp) builder.AddAttribute(15, "aria-describedby", $"{Id}-help");
 
 						// OnChange
-						builder.AddAttribute(seq++, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+						builder.AddAttribute(16, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 
 						// OnClick
-						if (ClearOnClick) builder.AddAttribute(seq++, "onclick", $"return textBox.clearValue('{Id}')");
-						else if (SelectOnClick) builder.AddAttribute(seq++, "onclick", $"return textBox.selectValue('{Id}')");
+						if (ClearOnClick) builder.AddAttribute(17, "onclick", $"return textBox.clearValue('{Id}')");
+						else if (SelectOnClick) builder.AddAttribute(18, "onclick", $"return textBox.selectValue('{Id}')");
 
 						// OnBlur
-						if (OnBlur.HasDelegate) builder.AddAttribute(seq++, "onblur", EventCallback.Factory.Create(this, this.OnBlurAsync));
+						if (OnBlur.HasDelegate) builder.AddAttribute(19, "onblur", EventCallback.Factory.Create(this, this.OnBlurAsync));
 
 						builder.CloseElement();
 					}

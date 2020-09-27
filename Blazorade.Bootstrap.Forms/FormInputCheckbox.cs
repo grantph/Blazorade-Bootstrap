@@ -43,84 +43,96 @@ namespace Blazorade.Bootstrap.Forms
 		/// <inheritdoc />
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			int seq = 0;
-
 			if (Display == Display.Block)
 			{
-				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "form-check");
+				// <div>
+				builder.OpenElement(0, "div");
+				builder.AddAttribute(1, "class", "form-check");
 			}
 			else
 			{
-				// Label
-				builder.OpenElement(seq++, "label");
+				// <label>
+				builder.OpenElement(2, "label");
 
 				// Size
 				switch (Size)
 				{
-					case InputSize.Large: builder.AddAttribute(seq++, "class", "checkbox-inline label-lg"); break;
-					case InputSize.Small: builder.AddAttribute(seq++, "class", "checkbox-inline label-sm"); break;
-					default: builder.AddAttribute(seq++, "class", "checkbox-inline"); break;
+					case InputSize.Large: builder.AddAttribute(3, "class", "checkbox-inline label-lg"); break;
+					case InputSize.Small: builder.AddAttribute(4, "class", "checkbox-inline label-sm"); break;
+					default: builder.AddAttribute(5, "class", "checkbox-inline"); break;
 				}
 
 				// Propagation
-				if (StopPropagation) builder.AddAttribute(seq++, "onclick", "event.stopPropagation()");
+				if (StopPropagation)
+				{
+					builder.AddAttribute(6, "onclick", "event.stopPropagation()");
+				}
 
 				// Label Width
-				if (LabelWidth.HasValue) builder.AddAttribute(seq++, "style", $"width:{LabelWidth}");
+				if (LabelWidth.HasValue)
+				{
+					builder.AddAttribute(7, "style", $"width:{LabelWidth}");
+				}
 			}
 
+			// <input>
+			builder.OpenElement(10, "input");
+			builder.AddMultipleAttributes(11, Attributes);
+			builder.AddAttribute(12, "type", "checkbox");
+			builder.AddAttribute(13, "checked", BindConverter.FormatValue(CurrentValue));
+			builder.AddAttribute(14, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
+
+			// Disabled?
+			if (Disabled ?? false)
 			{
-				// Input
-				builder.OpenElement(seq++, "input");
-				builder.AddMultipleAttributes(seq++, Attributes);
-				builder.AddAttribute(seq++, "type", "checkbox");
-				builder.AddAttribute(seq++, "checked", BindConverter.FormatValue(CurrentValue));
-				builder.AddAttribute(seq++, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
-
-				// Disabled?
-				if (Disabled ?? false) builder.AddAttribute(seq++, "disabled", string.Empty);
-
-				builder.CloseElement();
+				builder.AddAttribute(15, "disabled", string.Empty);
 			}
+
+			// </input>
+			builder.CloseElement();
 
 			if (Display == Display.Block)
 			{
-				// Label
-				builder.OpenElement(seq++, "label");
+				// <label>
+				builder.OpenElement(20, "label");
 
 				// Size
 				switch (Size)
 				{
-					case InputSize.Large: builder.AddAttribute(seq++, "class", "form-check-label label-lg"); break;
-					case InputSize.Small: builder.AddAttribute(seq++, "class", "form-check-label label-sm"); break;
-					default: builder.AddAttribute(seq++, "class", "form-check-label"); break;
+					case InputSize.Large: builder.AddAttribute(21, "class", "form-check-label label-lg"); break;
+					case InputSize.Small: builder.AddAttribute(22, "class", "form-check-label label-sm"); break;
+					default: builder.AddAttribute(23, "class", "form-check-label"); break;
 				}
 
-				builder.AddAttribute(seq++, "for", Id);
+				builder.AddAttribute(24, "for", Id);
 
 				// Propagation
-				if (StopPropagation) builder.AddAttribute(seq++, "onclick", "event.stopPropagation()");
+				if (StopPropagation)
+				{
+					builder.AddAttribute(25, "onclick", "event.stopPropagation()");
+				}
 
 				// Label Width
-				if (LabelWidth.HasValue) builder.AddAttribute(seq++, "style", $"width:{LabelWidth}");
+				if (LabelWidth.HasValue)
+				{
+					builder.AddAttribute(26, "style", $"width:{LabelWidth}");
+				}
 
 				// Content (inside Label)
-				builder.AddContent(seq++, ChildContent);
+				builder.AddContent(27, ChildContent);
 
-				// Label
+				// </label>
 				builder.CloseElement();
 
-				// Div
+				// </div>
 				builder.CloseElement();
 			}
 			else
 			{
 				// Content (inside Label)
-				builder.AddContent(seq++, ChildContent);
+				builder.AddContent(30, ChildContent);
 
-				// Label
+				// </label>
 				builder.CloseElement();
 			}
 		}

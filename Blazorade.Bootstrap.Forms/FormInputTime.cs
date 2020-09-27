@@ -48,66 +48,60 @@ namespace Blazorade.Bootstrap.Forms
 		/// <inheritdoc />
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			int seq = 0;
-
 			// Label
 			BuildRenderTreeLabel(builder);
 
 			if (HasInputGroup)
 			{
 				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group");
+				builder.OpenElement(0, "div");
+				builder.AddAttribute(1, "class", "input-group");
 			}
 
 			if (HasPrepend)
 			{
 				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group-prepend");
+				builder.OpenElement(2, "div");
+				builder.AddAttribute(3, "class", "input-group-prepend");
 
 				{
 					// Span
-					builder.OpenElement(seq++, "span");
-					builder.AddAttribute(seq++, "class", "input-group-text");
-					builder.AddContent(seq++, Prepend);
+					builder.OpenElement(4, "span");
+					builder.AddAttribute(5, "class", "input-group-text");
+					builder.AddContent(6, Prepend);
 					builder.CloseElement();
 				}
 
 				builder.CloseElement();
 			}
 
-			{
-				// Input
-				builder.OpenElement(seq++, "input");
-				builder.AddMultipleAttributes(seq++, Attributes);
-				builder.AddAttribute(seq++, "type", "time");
-				builder.AddAttribute(seq++, "class", CssClass); // This will overwrite version in Attributes
-				builder.AddAttribute(seq++, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-				builder.AddAttribute(seq++, "value", BindConverter.FormatValue(CurrentValueAsString));
+			// Input
+			builder.OpenElement(10, "input");
+			builder.AddMultipleAttributes(11, Attributes);
+			builder.AddAttribute(12, "type", "time");
+			builder.AddAttribute(13, "class", CssClass); // This will overwrite version in Attributes
+			builder.AddAttribute(14, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+			builder.AddAttribute(15, "value", BindConverter.FormatValue(CurrentValueAsString));
 
-				// Disabled?
-				if (Disabled ?? false) builder.AddAttribute(seq++, "disabled", string.Empty);
+			// Disabled?
+			if (Disabled ?? false) builder.AddAttribute(16, "disabled", string.Empty);
 
-				// Help
-				if (HasHelp) builder.AddAttribute(seq++, "aria-describedby", $"{Id}-help");
+			// Help
+			if (HasHelp) builder.AddAttribute(17, "aria-describedby", $"{Id}-help");
 
-				builder.CloseElement();
-			}
+			builder.CloseElement();
 
 			if (HasAppend)
 			{
 				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group-append");
+				builder.OpenElement(20, "div");
+				builder.AddAttribute(21, "class", "input-group-append");
 
-				{
-					// Span
-					builder.OpenElement(seq++, "span");
-					builder.AddAttribute(seq++, "class", "input-group-text");
-					builder.AddContent(seq++, Append);
-					builder.CloseElement();
-				}
+				// Span
+				builder.OpenElement(22, "span");
+				builder.AddAttribute(23, "class", "input-group-text");
+				builder.AddContent(24, Append);
+				builder.CloseElement();
 
 				builder.CloseElement();
 			}
