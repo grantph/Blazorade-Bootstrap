@@ -32,73 +32,66 @@ namespace Blazorade.Bootstrap.Forms
 		/// <inheritdoc />
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			int seq = 0;
-
 			if (HasLabel)
 			{
-				// Label
-				builder.OpenElement(seq++, "label");
-				builder.AddAttribute(seq++, "for", Id);
-				builder.AddContent(seq++, Label);
+				// <label>
+				builder.OpenElement(0, "label");
+				builder.AddAttribute(1, "for", Id);
+				builder.AddContent(2, Label);
 				builder.CloseElement();
+				// </label>
 			}
 
 			if (HasInputGroup)
 			{
-				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group");
+				// <div>
+				builder.OpenElement(3, "div");
+				builder.AddAttribute(4, "class", "input-group");
 			}
 
 			if (HasPrepend)
 			{
 				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group-prepend");
+				builder.OpenElement(5, "div");
+				builder.AddAttribute(6, "class", "input-group-prepend");
 
-				{
-					// Span
-					builder.OpenElement(seq++, "span");
-					builder.AddAttribute(seq++, "class", "input-group-text");
-					builder.AddContent(seq++, Prepend);
-					builder.CloseElement();
-				}
+				// Span
+				builder.OpenElement(7, "span");
+				builder.AddAttribute(8, "class", "input-group-text");
+				builder.AddContent(9, Prepend);
+				builder.CloseElement();
 
 				builder.CloseElement();
 			}
 
-			{
-				// Select
-				builder.OpenElement(seq++, "select");
-				builder.AddMultipleAttributes(seq++, Attributes);
-				builder.AddAttribute(seq++, "value", BindConverter.FormatValue(CurrentValueAsString));
-				builder.AddAttribute(seq++, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+			// Select
+			builder.OpenElement(10, "select");
+			builder.AddMultipleAttributes(11, Attributes);
+			builder.AddAttribute(12, "value", BindConverter.FormatValue(CurrentValueAsString));
+			builder.AddAttribute(13, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 
-				// Disabled?
-				if (Disabled ?? false) builder.AddAttribute(seq++, "disabled", string.Empty);
+			// Disabled?
+			if (Disabled ?? false) builder.AddAttribute(20, "disabled", string.Empty);
 
-				// Help
-				if (HasHelp) builder.AddAttribute(seq++, "aria-describedby", $"{Id}-help");
+			// Help
+			if (HasHelp) builder.AddAttribute(21, "aria-describedby", $"{Id}-help");
 
-				// Content
-				builder.AddContent(seq++, ChildContent);
+			// Content
+			builder.AddContent(22, ChildContent);
 
-				builder.CloseElement();
-			}
+			builder.CloseElement();
 
 			if (HasAppend)
 			{
 				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group-append");
+				builder.OpenElement(23, "div");
+				builder.AddAttribute(24, "class", "input-group-append");
 
-				{
-					// Span
-					builder.OpenElement(seq++, "span");
-					builder.AddAttribute(seq++, "class", "input-group-text");
-					builder.AddContent(seq++, Append);
-					builder.CloseElement();
-				}
+				// Span
+				builder.OpenElement(25, "span");
+				builder.AddAttribute(26, "class", "input-group-text");
+				builder.AddContent(27, Append);
+				builder.CloseElement();
 
 				builder.CloseElement();
 			}

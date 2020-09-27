@@ -49,84 +49,114 @@ namespace Blazorade.Bootstrap.Forms
 		/// </summary>
 		[Parameter] public string ParsingErrorMessage { get; set; } = "The {0} field must be a number.";
 
-		[Parameter]
-		public double? Min { get; set; } = null;
+		[Parameter] public double? Min { get; set; } = null;
 
-		[Parameter]
-		public double? Max { get; set; } = null;
+		[Parameter] public double? Max { get; set; } = null;
 
-		[Parameter]
-		public double? Step { get; set; } = null;
+		[Parameter] public double? Step { get; set; } = null;
+
+		[Parameter] public EventCallback<EventArgs> OnBlur { get; set; }
+
+		[Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
+
+		[Parameter] public EventCallback<EventArgs> OnFocus { get; set; }
 
 		/// <inheritdoc />
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			int seq = 0;
-
 			// Label
 			BuildRenderTreeLabel(builder);
 
 			if (HasInputGroup)
 			{
-				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group");
+				// <div>
+				builder.OpenElement(0, "div");
+				builder.AddAttribute(1, "class", "input-group");
 			}
 
 			if (HasPrepend)
 			{
-				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group-prepend");
+				// <div>
+				builder.OpenElement(2, "div");
+				builder.AddAttribute(3, "class", "input-group-prepend");
 
-				{
-					// Span
-					builder.OpenElement(seq++, "span");
-					builder.AddAttribute(seq++, "class", "input-group-text");
-					builder.AddContent(seq++, Prepend);
-					builder.CloseElement();
-				}
+				// <span>
+				builder.OpenElement(4, "span");
+				builder.AddAttribute(5, "class", "input-group-text");
+				builder.AddContent(6, Prepend);
+				builder.CloseElement();
+				// </span>
 
+				// </div>
 				builder.CloseElement();
 			}
 
+			// Input
+			builder.OpenElement(7, "input");
+			builder.AddMultipleAttributes(8, Attributes);
+			builder.AddAttribute(9, "type", "number");
+			builder.AddAttribute(10, "value", BindConverter.FormatValue(CurrentValueAsString));
+			builder.AddAttribute(11, "class", CssClass); // Overwrite class in Attributes
+
+			// Data Binding & OnChange
+			builder.AddAttribute(12, "onchange", EventCallback.Factory.CreateBinder<string>(this, async (__value) =>
 			{
-				// Input
-				builder.OpenElement(seq++, "input");
-				builder.AddMultipleAttributes(seq++, Attributes);
-				builder.AddAttribute(seq++, "type", "number");
-				builder.AddAttribute(seq++, "value", BindConverter.FormatValue(CurrentValueAsString));
-				builder.AddAttribute(seq++, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-				builder.AddAttribute(seq++, "class", CssClass); // Overwrite class in Attributes
+				// Bind
+				CurrentValueAsString = __value;
 
-				// Disabled?
-				if (Disabled ?? false) builder.AddAttribute(seq++, "disabled", string.Empty);
+				// OnChange
+				if (OnChange.HasDelegate)
+				{
+					await OnChange.InvokeAsync(new ChangeEventArgs { Value = __value });
+				}
+			}, CurrentValueAsString));
 
-				// Help
-				if (HasHelp) builder.AddAttribute(seq++, "aria-describedby", $"{Id}-help");
-
-				builder.CloseElement();
+			// OnBlur
+			if (OnBlur.HasDelegate)
+			{
+				builder.AddAttribute(13, "onblur", EventCallback.Factory.Create(this, async (__value) =>
+				{
+					await OnBlur.InvokeAsync(new EventArgs());
+				}));
 			}
+
+			// OnFocus
+			if (OnFocus.HasDelegate)
+			{
+				builder.AddAttribute(13, "onfocus", EventCallback.Factory.Create(this, async (__value) =>
+				{
+					await OnFocus.InvokeAsync(new EventArgs());
+				}));
+			}
+
+			// Disabled?
+			if (Disabled ?? false) builder.AddAttribute(20, "disabled", string.Empty);
+
+			// Help
+			if (HasHelp) builder.AddAttribute(21, "aria-describedby", $"{Id}-help");
+
+			builder.CloseElement();
 
 			if (HasAppend)
 			{
-				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group-append");
+				// <div>
+				builder.OpenElement(22, "div");
+				builder.AddAttribute(23, "class", "input-group-append");
 
-				{
-					// Span
-					builder.OpenElement(seq++, "span");
-					builder.AddAttribute(seq++, "class", "input-group-text");
-					builder.AddContent(seq++, Append);
-					builder.CloseElement();
-				}
+				// <span>
+				builder.OpenElement(24, "span");
+				builder.AddAttribute(25, "class", "input-group-text");
+				builder.AddContent(26, Append);
+				builder.CloseElement();
+				// </span>
 
+				// </div>
 				builder.CloseElement();
 			}
 
 			if (HasInputGroup)
 			{
+				// </div>
 				builder.CloseElement();
 			}
 

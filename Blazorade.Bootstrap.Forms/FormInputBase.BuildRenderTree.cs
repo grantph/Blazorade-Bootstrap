@@ -10,20 +10,18 @@ namespace Blazorade.Bootstrap.Forms
 		{
 			if (!HasAppend) return;
 
-			int seq = 0;
+			// <div>
+			builder.OpenElement(100, "div");
+			builder.AddAttribute(101, "class", "input-group-append");
 
-			// Div
-			builder.OpenElement(seq++, "div");
-			builder.AddAttribute(seq++, "class", "input-group-append");
+			// <span>
+			builder.OpenElement(102, "span");
+			builder.AddAttribute(103, "class", "input-group-text");
+			builder.AddContent(104, Append);
+			builder.CloseElement();
+			// </span>
 
-			{
-				// Span
-				builder.OpenElement(seq++, "span");
-				builder.AddAttribute(seq++, "class", "input-group-text");
-				builder.AddContent(seq++, Append);
-				builder.CloseElement();
-			}
-
+			// </div>
 			builder.CloseElement();
 		}
 
@@ -34,14 +32,13 @@ namespace Blazorade.Bootstrap.Forms
 			// No Help?
 			if (!HasHelp) return;
 
-			int seq = 0;
-
-			// Small
-			builder.OpenElement(seq++, "small");
-			builder.AddAttribute(seq++, "id", $"{Id}-help");
-			builder.AddAttribute(seq++, "class", HelpDisplay == Display.Block ? "form-text text-muted" : "text-muted");
-			builder.AddContent(seq++, Help);
+			// <small>
+			builder.OpenElement(110, "small");
+			builder.AddAttribute(111, "id", $"{Id}-help");
+			builder.AddAttribute(112, "class", HelpDisplay == Display.Block ? "form-text text-muted" : "text-muted");
+			builder.AddContent(113, Help);
 			builder.CloseElement();
+			// </small>
 		}
 
 		/// <summary>Builds the Bootstrap Label block.</summary>
@@ -50,14 +47,13 @@ namespace Blazorade.Bootstrap.Forms
 		{
 			if (!HasLabel) return;
 
-			int seq = 0;
-
-			// Label
-			builder.OpenElement(seq++, "label");
-			if (ScreenReaderOnly) builder.AddAttribute(seq++, "class", "sr-only");
-			builder.AddAttribute(seq++, "for", Id);
-			builder.AddContent(seq++, Label);
+			// <label>
+			builder.OpenElement(120, "label");
+			if (ScreenReaderOnly) builder.AddAttribute(121, "class", "sr-only");
+			builder.AddAttribute(122, "for", Id);
+			builder.AddContent(123, Label);
 			builder.CloseElement();
+			// </label>
 		}
 
 		/// <summary>Stop building the Bootstrap Input Group. Should always be paired with BuildRenderTreeInputGroupOpen.</summary>
@@ -66,26 +62,24 @@ namespace Blazorade.Bootstrap.Forms
 		{
 			if (!HasInputGroup) return;
 
-			int seq = 0;
-
 			if (HasAppend)
 			{
-				// Div
-				builder.OpenElement(seq++, "div");
-				builder.AddAttribute(seq++, "class", "input-group-append");
+				// <div>
+				builder.OpenElement(133, "div");
+				builder.AddAttribute(134, "class", "input-group-append");
 
-				{
-					// Span
-					builder.OpenElement(seq++, "span");
-					builder.AddAttribute(seq++, "class", "input-group-text");
-					builder.AddContent(seq++, Append);
-					builder.CloseElement();
-				}
+				// <span>
+				builder.OpenElement(135, "span");
+				builder.AddAttribute(136, "class", "input-group-text");
+				builder.AddContent(137, Append);
+				builder.CloseElement();
+				// </span>
 
+				// </div>
 				builder.CloseElement();
 			}
 
-			// /Div
+			// </div>
 			builder.CloseElement();
 		}
 
@@ -95,11 +89,9 @@ namespace Blazorade.Bootstrap.Forms
 		{
 			if (!HasInputGroup) return;
 
-			int seq = 0;
-
-			// Div
-			builder.OpenElement(seq++, "div");
-			builder.AddAttribute(seq++, "class", "input-group");
+			// <div>
+			builder.OpenElement(130, "div");
+			builder.AddAttribute(131, "class", "input-group");
 		}
 
 		/// <summary>Build the Bootstrap Prepend block.</summary>
@@ -108,21 +100,19 @@ namespace Blazorade.Bootstrap.Forms
 		{
 			if (!HasPrepend) return;
 
-			int seq = 0;
+			// <div>
+			builder.OpenElement(140, "div");
+			builder.AddAttribute(141, "class", "input-group-prepend");
 
-			// Div
-			builder.OpenElement(seq++, "div");
-			builder.AddAttribute(seq++, "class", "input-group-prepend");
+			// <span>
+			builder.OpenElement(142, "span");
+			builder.AddAttribute(143, "class", "input-group-text");
+			builder.AddAttribute(144, "id", $"{Id}-prepend");
+			builder.AddContent(145, Prepend);
+			builder.CloseElement();
+			// </span>
 
-			{
-				// Span
-				builder.OpenElement(seq++, "span");
-				builder.AddAttribute(seq++, "class", "input-group-text");
-				builder.AddAttribute(seq++, "id", $"{Id}-prepend");
-				builder.AddContent(seq++, Prepend);
-				builder.CloseElement();
-			}
-
+			// </div>
 			builder.CloseElement();
 		}
 	}
