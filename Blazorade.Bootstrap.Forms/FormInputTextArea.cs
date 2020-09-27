@@ -30,27 +30,25 @@ namespace Blazorade.Bootstrap.Forms
 		/// <inheritdoc />
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
+			builder.OpenElement(0, "textarea");
+			builder.AddMultipleAttributes(1, Attributes);
+			builder.AddAttribute(2, "class", CssClass); // Overwrite class in Attributes
+			builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValue));
+			builder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+
+			// Disabled?
+			if (Disabled ?? false)
 			{
-				builder.OpenElement(0, "textarea");
-				builder.AddMultipleAttributes(1, Attributes);
-				builder.AddAttribute(2, "class", CssClass); // Overwrite class in Attributes
-				builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValue));
-				builder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-
-				// Disabled?
-				if (Disabled ?? false)
-				{
-					builder.AddAttribute(5, "disabled", string.Empty);
-				}
-
-				// Help
-				if (HasHelp)
-				{
-					builder.AddAttribute(6, "aria-describedby", $"{Id}-help");
-				}
-
-				builder.CloseElement();
+				builder.AddAttribute(5, "disabled", string.Empty);
 			}
+
+			// Help
+			if (HasHelp)
+			{
+				builder.AddAttribute(6, "aria-describedby", $"{Id}-help");
+			}
+
+			builder.CloseElement();
 
 			// Help
 			BuildRenderTreeHelp(builder);

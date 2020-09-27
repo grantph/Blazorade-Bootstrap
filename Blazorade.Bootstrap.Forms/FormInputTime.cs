@@ -64,13 +64,11 @@ namespace Blazorade.Bootstrap.Forms
 				builder.OpenElement(2, "div");
 				builder.AddAttribute(3, "class", "input-group-prepend");
 
-				{
-					// Span
-					builder.OpenElement(4, "span");
-					builder.AddAttribute(5, "class", "input-group-text");
-					builder.AddContent(6, Prepend);
-					builder.CloseElement();
-				}
+				// Span
+				builder.OpenElement(4, "span");
+				builder.AddAttribute(5, "class", "input-group-text");
+				builder.AddContent(6, Prepend);
+				builder.CloseElement();
 
 				builder.CloseElement();
 			}
@@ -84,10 +82,16 @@ namespace Blazorade.Bootstrap.Forms
 			builder.AddAttribute(15, "value", BindConverter.FormatValue(CurrentValueAsString));
 
 			// Disabled?
-			if (Disabled ?? false) builder.AddAttribute(16, "disabled", string.Empty);
+			if (Disabled ?? false)
+			{
+				builder.AddAttribute(16, "disabled", string.Empty);
+			}
 
 			// Help
-			if (HasHelp) builder.AddAttribute(17, "aria-describedby", $"{Id}-help");
+			if (HasHelp)
+			{
+				builder.AddAttribute(17, "aria-describedby", $"{Id}-help");
+			}
 
 			builder.CloseElement();
 

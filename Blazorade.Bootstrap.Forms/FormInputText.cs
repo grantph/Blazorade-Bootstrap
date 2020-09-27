@@ -37,10 +37,16 @@ namespace Blazorade.Bootstrap.Forms
 			builder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 
 			// Disabled?
-			if (Disabled ?? false) builder.AddAttribute(5, "disabled", string.Empty);
+			if (Disabled ?? false)
+			{
+				builder.AddAttribute(5, "disabled", string.Empty);
+			}
 
 			// Help
-			if (HasHelp) builder.AddAttribute(6, "aria-describedby", $"{Id}-help");
+			if (HasHelp)
+			{
+				builder.AddAttribute(6, "aria-describedby", $"{Id}-help");
+			}
 
 			builder.CloseElement();
 
