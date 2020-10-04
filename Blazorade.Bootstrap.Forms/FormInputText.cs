@@ -32,7 +32,7 @@ namespace Blazorade.Bootstrap.Forms
 		{
 			builder.OpenElement(0, "input");
 			builder.AddMultipleAttributes(1, Attributes);
-			builder.AddAttribute(2, "class", CssClass); // Overwrite class in Attributes
+			builder.AddAttribute(2, Html.CLASS, CssClass); // Overwrite class in Attributes
 			builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValue));
 			builder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 

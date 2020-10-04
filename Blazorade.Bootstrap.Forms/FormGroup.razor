@@ -13,5 +13,12 @@ else
 		<div id="@Id">
 			@ChildContent
 		</div>
+		@if (HasHelp)
+		{
+			<small id="@($"{Id}-{Bootstrap.HELP}")"
+				   class="@(HelpDisplay == Display.Block ? $"{Bootstrap.FORM_TEXT} {Bootstrap.TEXT_MUTED}" : Bootstrap.TEXT_MUTED))">
+				@Help
+			</small>
+		}
 	</div>
 }

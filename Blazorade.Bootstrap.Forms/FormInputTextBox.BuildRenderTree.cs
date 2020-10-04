@@ -22,7 +22,7 @@ namespace Blazorade.Bootstrap.Forms
 						// Input
 						builder.OpenElement(0, Html.INPUT);
 						builder.AddMultipleAttributes(1, this.Attributes);
-						builder.AddAttribute(2, Html.CLASS, CssClass); // Overwrite Attributes["class"]
+						builder.AddAttribute(2, Html.CLASS, CssClass); // Overwrite Attributes[Html.CLASS]
 						builder.AddAttribute(3, Html.VALUE, BindConverter.FormatValue(CurrentValue));
 
 						// Disabled?
@@ -56,7 +56,7 @@ namespace Blazorade.Bootstrap.Forms
 						// Input
 						builder.OpenElement(10, Html.TEXTAREA);
 						builder.AddMultipleAttributes(11, this.Attributes);
-						builder.AddAttribute(12, Html.CLASS, CssClass); // Overwrite Attributes["class"]
+						builder.AddAttribute(12, Html.CLASS, CssClass); // Overwrite Attributes[Html.CLASS]
 						builder.AddAttribute(13, Html.VALUE, BindConverter.FormatValue(CurrentValue));
 
 						// Disabled?

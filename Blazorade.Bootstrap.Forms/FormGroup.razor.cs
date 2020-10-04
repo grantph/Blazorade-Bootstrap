@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
 
@@ -8,6 +7,18 @@ namespace Blazorade.Bootstrap.Forms
 	public partial class FormGroup
 	{
 		[Parameter] public string Label { get; set; } = string.Empty;
+
+		/// <summary>
+		/// Bootstrap Input group that adds a help block to the input control.
+		/// </summary>
+		[Parameter] public string Help { get; set; }
+
+		/// <summary>
+		/// Bootstrap Input group help mode. Defaults to Block.
+		/// </summary>
+		[Parameter] public Display HelpDisplay { get; set; } = Display.Block;
+
+		protected bool HasHelp => !string.IsNullOrEmpty(Help);
 
 		public FormGroup()
 		{
@@ -22,7 +33,7 @@ namespace Blazorade.Bootstrap.Forms
 			//Console.WriteLine($"{nameof(FormGroup)} {count++}");
 
 			// Add FormGroup Class
-			AddClasses("form-group");
+			AddClasses(Bootstrap.FORM_GROUP);
 
 			await base.OnParametersSetAsync();
 		}

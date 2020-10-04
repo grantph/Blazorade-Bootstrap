@@ -53,14 +53,14 @@ namespace Blazorade.Bootstrap.Forms
 
 		[Parameter] public string Format { get; set; }
 
-		protected bool HasFormat { get => !string.IsNullOrEmpty(Format); }
+		protected bool HasFormat => !string.IsNullOrEmpty(Format);
 
 		/// <summary>
 		/// Bootstrap Form group label.
 		/// </summary>
 		[Parameter] public string Label { get; set; }
 
-		protected bool HasLabel { get => !string.IsNullOrEmpty(Label); }
+		protected bool HasLabel => !string.IsNullOrEmpty(Label);
 
 		[Parameter] public string Placeholder { get; set; }
 
@@ -71,16 +71,16 @@ namespace Blazorade.Bootstrap.Forms
 		/// </summary>
 		[Parameter] public string Prepend { get; set; }
 
-		protected bool HasPrepend { get => !string.IsNullOrEmpty(Prepend); }
+		protected bool HasPrepend => !string.IsNullOrEmpty(Prepend);
 
 		/// <summary>
 		/// Bootstrap Input group that adds a suffix to the input control.
 		/// </summary>
 		[Parameter] public string Append { get; set; }
 
-		protected bool HasAppend { get => !string.IsNullOrEmpty(Append); }
+		protected bool HasAppend => !string.IsNullOrEmpty(Append);
 
-		protected bool HasInputGroup { get => HasPrepend || HasAppend; }
+		protected bool HasInputGroup => HasPrepend || HasAppend;
 
 		/// <summary>
 		/// Bootstrap Input group that adds a help block to the input control.
@@ -92,7 +92,7 @@ namespace Blazorade.Bootstrap.Forms
 		/// </summary>
 		[Parameter] public Display HelpDisplay { get; set; } = Display.Block;
 
-		protected bool HasHelp { get => !string.IsNullOrEmpty(Help); }
+		protected bool HasHelp => !string.IsNullOrEmpty(Help);
 
 		[Parameter]
 		public bool ScreenReaderOnly { get; set; } = false;
@@ -202,8 +202,7 @@ namespace Blazorade.Bootstrap.Forms
 		/// </summary>
 		/// <param name="value">The value to format.</param>
 		/// <returns>A string representation of the value.</returns>
-		protected virtual string FormatValueAsString(TValue value)
-			=> value?.ToString();
+		protected virtual string FormatValueAsString(TValue value) => value?.ToString();
 
 		/// <summary>
 		/// Parses a string to create an instance of <typeparamref name="TValue"/>. Derived classes can override this to change how
@@ -219,8 +218,7 @@ namespace Blazorade.Bootstrap.Forms
 		/// Gets a string that indicates the status of the field being edited. This will include
 		/// some combination of "modified", "valid", or "invalid", depending on the status of the field.
 		/// </summary>
-		private string FieldClass
-			=> EditContext.FieldCssClass(FieldIdentifier);
+		private string FieldClass => EditContext.FieldCssClass(FieldIdentifier);
 
 		/// <summary>
 		/// Gets a CSS class string that combines the <c>class</c> attribute and <see cref="FieldClass"/>
@@ -232,7 +230,7 @@ namespace Blazorade.Bootstrap.Forms
 			get
 			{
 				if (Attributes != null &&
-					Attributes.TryGetValue("class", out var @class) &&
+					Attributes.TryGetValue(Html.CLASS, out var @class) &&
 					!string.IsNullOrEmpty(Convert.ToString(@class)))
 				{
 					return $"{@class} {FieldClass}";
@@ -304,10 +302,10 @@ namespace Blazorade.Bootstrap.Forms
 			}
 
 			// Placeholder?
-			if (!string.IsNullOrEmpty(Placeholder)) AddAttribute("placeholder", Placeholder);
+			if (!string.IsNullOrEmpty(Placeholder)) AddAttribute(Html.PLACEHOLDER, Placeholder);
 
 			// ReadOnly?
-			if (ReadOnly) AddAttribute("readonly", string.Empty);
+			if (ReadOnly) AddAttribute(Html.READONLY, string.Empty);
 
 			base.OnParametersSet();
 		}

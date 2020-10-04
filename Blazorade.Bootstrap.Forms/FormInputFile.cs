@@ -50,8 +50,8 @@ namespace Blazorade.Bootstrap.Forms
 			// File Input. Indenting to make the <div></div> block clear.
 
 			// Div
-			builder.OpenElement(0, "div");
-			builder.AddAttribute(1, "class", "custom-file");
+			builder.OpenElement(0, Html.DIV);
+			builder.AddAttribute(1, Html.CLASS, "custom-file");
 
 			// Input
 			// < input type = "file" @ref = "inputFileElement" @attributes = "UnmatchedParameters" />
@@ -68,7 +68,7 @@ namespace Blazorade.Bootstrap.Forms
 
 			// Label
 			builder.OpenElement(10, "label");
-			builder.AddAttribute(11, "class", ScreenReaderOnly ? "sr-only custom-file-label" : "custom-file-label");
+			builder.AddAttribute(11, Html.CLASS, ScreenReaderOnly ? "sr-only custom-file-label" : "custom-file-label");
 			builder.AddAttribute(12, "for", $"{Id}");
 			builder.AddContent(13, Label);
 			builder.CloseElement();

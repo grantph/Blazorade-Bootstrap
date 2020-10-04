@@ -46,46 +46,59 @@ namespace Blazorade.Bootstrap.Forms
 			if (Display == Display.Block)
 			{
 				// <div>
-				builder.OpenElement(0, "div");
-				builder.AddAttribute(1, "class", "form-check");
+				builder.OpenElement(0, Html.DIV);
+				builder.AddAttribute(1, Html.CLASS, Bootstrap.FORM_CHECK);
 			}
 			else
 			{
 				// <label>
-				builder.OpenElement(2, "label");
+				builder.OpenElement(2, Html.LABEL);
 
 				// Size
 				switch (Size)
 				{
-					case InputSize.Large: builder.AddAttribute(3, "class", "checkbox-inline label-lg"); break;
-					case InputSize.Small: builder.AddAttribute(4, "class", "checkbox-inline label-sm"); break;
-					default: builder.AddAttribute(5, "class", "checkbox-inline"); break;
+					case InputSize.Large: builder.AddAttribute(3, Html.CLASS, $"{Bootstrap.CHECKBOX_INLINE} {Bootstrap.LABEL_LARGE}"); break;
+					case InputSize.Small: builder.AddAttribute(4, Html.CLASS, $"{Bootstrap.CHECKBOX_INLINE} {Bootstrap.LABEL_SMALL}"); break;
+
+					default: builder.AddAttribute(5, Html.CLASS, Bootstrap.CHECKBOX_INLINE); break;
 				}
 
 				// Propagation
 				if (StopPropagation)
 				{
-					builder.AddAttribute(6, "onclick", "event.stopPropagation()");
+					builder.AddAttribute(6, Html.ONCLICK, "event.stopPropagation()");
 				}
 
 				// Label Width
 				if (LabelWidth.HasValue)
 				{
-					builder.AddAttribute(7, "style", $"width:{LabelWidth}");
+					builder.AddAttribute(7, Html.STYLE, $"width:{LabelWidth}");
 				}
 			}
 
 			// <input>
-			builder.OpenElement(10, "input");
+			builder.OpenElement(10, Html.INPUT);
 			builder.AddMultipleAttributes(11, Attributes);
-			builder.AddAttribute(12, "type", "checkbox");
-			builder.AddAttribute(13, "checked", BindConverter.FormatValue(CurrentValue));
-			builder.AddAttribute(14, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
+
+			// type=checkbox
+			builder.AddAttribute(12, Html.TYPE, Html.CHECKBOX);
+
+			// Help
+			if (HasHelp)
+			{
+				builder.AddAttribute(13, Html.ARIA_DESCRIBEDBY, $"{Id}-{Bootstrap.HELP}");
+			}
+
+			// Checked
+			builder.AddAttribute(14, Html.CHECKED, BindConverter.FormatValue(CurrentValue));
+
+			// OnChange
+			builder.AddAttribute(15, Html.ONCHANGE, EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
 
 			// Disabled?
 			if (Disabled ?? false)
 			{
-				builder.AddAttribute(15, "disabled", string.Empty);
+				builder.AddAttribute(16, Html.DISABLED, string.Empty);
 			}
 
 			// </input>
@@ -93,33 +106,56 @@ namespace Blazorade.Bootstrap.Forms
 
 			if (Display == Display.Block)
 			{
+				// BLOCK
+
 				// <label>
-				builder.OpenElement(20, "label");
+				builder.OpenElement(20, Html.LABEL);
 
 				// Size
 				switch (Size)
 				{
-					case InputSize.Large: builder.AddAttribute(21, "class", "form-check-label label-lg"); break;
-					case InputSize.Small: builder.AddAttribute(22, "class", "form-check-label label-sm"); break;
-					default: builder.AddAttribute(23, "class", "form-check-label"); break;
+					case InputSize.Large:
+
+						builder.AddAttribute(21, Html.CLASS, $"{Bootstrap.FORM_CHECK_LABEL} {Bootstrap.LABEL_LARGE}");
+
+						break;
+
+					case InputSize.Small:
+
+						builder.AddAttribute(22, Html.CLASS, $"{Bootstrap.FORM_CHECK_LABEL} {Bootstrap.LABEL_SMALL}");
+
+						break;
+
+					default:
+
+						builder.AddAttribute(23, Html.CLASS, Bootstrap.FORM_CHECK_LABEL);
+
+						break;
 				}
 
-				builder.AddAttribute(24, "for", Id);
+				builder.AddAttribute(24, Html.FOR, Id);
 
 				// Propagation
 				if (StopPropagation)
 				{
-					builder.AddAttribute(25, "onclick", "event.stopPropagation()");
+					builder.AddAttribute(25, Html.ONCLICK, "event.stopPropagation()");
 				}
 
 				// Label Width
 				if (LabelWidth.HasValue)
 				{
-					builder.AddAttribute(26, "style", $"width:{LabelWidth}");
+					builder.AddAttribute(26, Html.STYLE, $"width:{LabelWidth}");
 				}
 
-				// Content (inside Label)
-				builder.AddContent(27, ChildContent);
+				// Label (preferred) or Content
+				if (!string.IsNullOrEmpty(Label))
+				{
+					builder.AddContent(30, Label);
+				}
+				else
+				{
+					builder.AddContent(30, ChildContent);
+				}
 
 				// </label>
 				builder.CloseElement();
@@ -129,12 +165,24 @@ namespace Blazorade.Bootstrap.Forms
 			}
 			else
 			{
-				// Content (inside Label)
-				builder.AddContent(30, ChildContent);
+				// INLINE
+
+				// Label (preferred) or Content
+				if (!string.IsNullOrEmpty(Label))
+				{
+					builder.AddContent(30, Label);
+				}
+				else
+				{
+					builder.AddContent(30, ChildContent);
+				}
 
 				// </label>
 				builder.CloseElement();
 			}
+
+			// Help
+			BuildRenderTreeHelp(builder);
 		}
 
 		/// <inheritdoc />
@@ -147,7 +195,7 @@ namespace Blazorade.Bootstrap.Forms
 			SetIdIfEmpty();
 
 			// Form Checkbox
-			AddClasses("form-check-input");
+			AddClasses(Bootstrap.FORM_CHECK_INPUT);
 
 			base.OnParametersSet();
 		}

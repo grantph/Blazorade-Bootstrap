@@ -45,19 +45,19 @@ namespace Blazorade.Bootstrap.Forms
 			if (HasInputGroup)
 			{
 				// <div>
-				builder.OpenElement(3, "div");
-				builder.AddAttribute(4, "class", "input-group");
+				builder.OpenElement(3, Html.DIV);
+				builder.AddAttribute(4, Html.CLASS, Bootstrap.INPUT_GROUP);
 			}
 
 			if (HasPrepend)
 			{
 				// Div
-				builder.OpenElement(5, "div");
-				builder.AddAttribute(6, "class", "input-group-prepend");
+				builder.OpenElement(5, Html.DIV);
+				builder.AddAttribute(6, Html.CLASS, Bootstrap.INPUT_GROUP_PREPEND);
 
 				// Span
 				builder.OpenElement(7, "span");
-				builder.AddAttribute(8, "class", "input-group-text");
+				builder.AddAttribute(8, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(9, Prepend);
 				builder.CloseElement();
 
@@ -84,12 +84,12 @@ namespace Blazorade.Bootstrap.Forms
 			if (HasAppend)
 			{
 				// Div
-				builder.OpenElement(23, "div");
-				builder.AddAttribute(24, "class", "input-group-append");
+				builder.OpenElement(23, Html.DIV);
+				builder.AddAttribute(24, Html.CLASS, "input-group-append");
 
 				// Span
 				builder.OpenElement(25, "span");
-				builder.AddAttribute(26, "class", "input-group-text");
+				builder.AddAttribute(26, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(27, Append);
 				builder.CloseElement();
 
