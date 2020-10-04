@@ -48,34 +48,33 @@ namespace Blazorade.Bootstrap.Forms
 			BuildRenderTreePrepend(builder);
 
 			// File Input. Indenting to make the <div></div> block clear.
-			{
-				// Div
-				builder.OpenElement(0, "div");
-				builder.AddAttribute(1, "class", "custom-file");
 
-				// Input
-				// < input type = "file" @ref = "inputFileElement" @attributes = "UnmatchedParameters" />
-				builder.OpenElement(2, "input");
-				builder.AddMultipleAttributes(3, Attributes);
-				builder.AddAttribute(4, "type", "file");
+			// Div
+			builder.OpenElement(0, "div");
+			builder.AddAttribute(1, "class", "custom-file");
 
-				//builder.AddAttribute(seq++, "onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, NotifyChange));
+			// Input
+			// < input type = "file" @ref = "inputFileElement" @attributes = "UnmatchedParameters" />
+			builder.OpenElement(2, "input");
+			builder.AddMultipleAttributes(3, Attributes);
+			builder.AddAttribute(4, "type", "file");
 
-				// Create an ElementReference suitable for use in JSInterop
-				builder.AddElementReferenceCapture(5, (__value) => inputFileElement = __value);
+			//builder.AddAttribute(5, "onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, NotifyChange));
 
-				builder.CloseElement();
+			// Create an ElementReference suitable for use in JSInterop
+			builder.AddElementReferenceCapture(6, (__value) => inputFileElement = __value);
 
-				// Label
-				builder.OpenElement(6, "label");
-				builder.AddAttribute(7, "class", ScreenReaderOnly ? "sr-only custom-file-label" : "custom-file-label");
-				builder.AddAttribute(8, "for", $"{Id}");
-				builder.AddContent(9, Label);
-				builder.CloseElement();
+			builder.CloseElement();
 
-				// /Div
-				builder.CloseElement();
-			}
+			// Label
+			builder.OpenElement(10, "label");
+			builder.AddAttribute(11, "class", ScreenReaderOnly ? "sr-only custom-file-label" : "custom-file-label");
+			builder.AddAttribute(12, "for", $"{Id}");
+			builder.AddContent(13, Label);
+			builder.CloseElement();
+
+			// /Div
+			builder.CloseElement();
 
 			// Append
 			BuildRenderTreeAppend(builder);
@@ -110,7 +109,7 @@ namespace Blazorade.Bootstrap.Forms
 			if (firstRender)
 			{
 				thisReference = DotNetObjectReference.Create(this);
-				await JSRuntime.InvokeAsync<object>("BlazorInputFile.init", inputFileElement, thisReference);
+				await JSRuntime.BlazorInputFile_Init(inputFileElement, thisReference);
 			}
 		}
 
@@ -123,7 +122,7 @@ namespace Blazorade.Bootstrap.Forms
 
 		internal async Task<FileListEntryImpl> ConvertToImageFileAsync(FileListEntryImpl file, string format, int maxWidth, int maxHeight)
 		{
-			FileListEntryImpl imageFile = await JSRuntime.InvokeAsync<FileListEntryImpl>("BlazorInputFile.toImageFile", inputFileElement, file.Id, format, maxWidth, maxHeight);
+			FileListEntryImpl imageFile = await JSRuntime.BlazorInputFile_ToImageFile(inputFileElement, file.Id, format, maxWidth, maxHeight);
 
 			// So that method invocations on the file can be dispatched back here
 			imageFile.Owner = (FormInputFile)(object)this;
