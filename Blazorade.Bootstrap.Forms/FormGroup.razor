@@ -1,0 +1,17 @@
+﻿@inherits Blazorade.Bootstrap.Components.BootstrapComponentBase
+
+@if (string.IsNullOrEmpty(Label))
+{
+	<div class="@(string.Join(' ', Classes))">
+		@ChildContent
+	</div>
+}
+else
+{
+	<div class="@(string.Join(' ', Classes))">
+		<label for="@Id">@Label</label>
+		<div id="@Id">
+			@ChildContent
+		</div>
+	</div>
+}
