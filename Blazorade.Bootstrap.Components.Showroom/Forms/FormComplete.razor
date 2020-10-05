@@ -3,19 +3,22 @@
 	Spacing headingMarginTop = Spacing.S5;
 }
 
-<Heading Level="HeadingLevel.H2">FormInputTextBox</Heading>
+<Heading Level="HeadingLevel.H2">Form components</Heading>
 <Paragraph>
-	Easily create different kinds of text boxes for a variety of purposes with the <code>FormInputTextBox</code> component.
+	Easily create different kinds of forms for a variety of purposes with the Form components.
 </Paragraph>
 
-<DocsSection ComponentName="FormInputTextBox" />
+<DocsSection ComponentName="Form" />
 
-<Heading Id="standard-buttons" IsAnchor="true" Level="HeadingLevel.H4" MarginTop="@headingMarginTop">FormInputTextBox</Heading>
+<Heading Id="standard-buttons" IsAnchor="true" Level="HeadingLevel.H4" MarginTop="@headingMarginTop">Form components</Heading>
 <Paragraph>
-	Bootstrap buttons come in different styles for different semantic purposes.
-	See <Anchor Url="https://github.com/MikaBerglund/Blazor-Bootstrap/wiki/Button#basic-usage" OpenInNewTab="true">the wiki</Anchor> for sample code.
+	Bootstrap forms can be used to create data entry pages. You can also use these forms in read-only mode (ModelState=View) to quickly display structured data, or toggle a form between read and edit modes.
+	See <Anchor Url="https://github.com/MikaBerglund/Blazor-Bootstrap/wiki/Forms#basic-usage" OpenInNewTab="true">the wiki</Anchor> for sample code.
 </Paragraph>
 
+<Heading Level="HeadingLevel.H5">
+	Example
+</Heading>
 <Row class="pl-4 pr-4">
 	<Column class="col-12 col-md-6">
 
@@ -24,36 +27,46 @@
 		<Form Model="editExample" OnValidSubmit="Submit_Click">
 			<Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator />
 
-			<FormGroup Label="Example 1">
-				<FormInputTextBox Placeholder="Enter your name" Help="This field is optional any length" @bind-Value="editExample.Example1" />
+			<FormGroup Label="Name">
+				<FormInputTextBox Placeholder="Name" Help="Implements FormInputTextBox" @bind-Value="editExample.Name" />
 			</FormGroup>
-			<FormGroup Label="Example 2">
-				<FormInputTextBox Placeholder="Enter your name" Help="This field is mandatory any length. Uses Mode=TextBoxMode.MultiLine" @bind-Value="editExample.Example2" Mode="TextBoxMode.MultiLine" Rows="3" />
-			</FormGroup>
-
 			<Row>
-				<FormGroup Label="Example 3" class="col-4">
-					<FormInputTextBox Placeholder="Enter your name" Help="Enter at least 10 characters" @bind-Value="editExample.Example3" />
+				<FormGroup class="col-8" Label="Title">
+					<FormInputSelect Placeholder="Title" Help="Implements FormInputSelect" @bind-Value="editExample.Title">
+						<Option />
+						<Option Name="Mr" Value="Mister" />
+						<Option Name="Ms" Value="Miss" />
+						<Option Name="Mrs" Value="Mistress" />
+						<Option Name="Dr" Value="Doctor" />
+					</FormInputSelect>
 				</FormGroup>
-
-				<FormGroup Label="Example 4" class="col-4">
-					<FormInputTextBox Placeholder="Enter your name" Help="Enter no more than 5 characters" @bind-Value="editExample.Example4" />
-				</FormGroup>
-
-				<FormGroup Label="Example 5" class="col-4">
-					<FormInputTextBox Placeholder="Enter your name" Help="Enter 4 to 10 characters. Uses StringLength attribute." @bind-Value="editExample.Example5" />
+				<FormGroup class="col-4" Label="FormGroup Label Checkbox 1" Help="FormGroup Help Checkbox 1">
+					<FormInputCheckbox Label="Checkbox 1" @bind-Value="editExample.Checkbox1" />
 				</FormGroup>
 			</Row>
 
 			<Row>
-				<FormGroup Label="Example 6" class="col-4">
-					<FormInputTextBox Placeholder="Enter your name" Help="Enter 4 to 10 characters. Uses MinLength and MaxLength attributes." @bind-Value="editExample.Example6" />
+				<FormGroup class="col-4" Label="Date 1">
+					<FormInputDate TValue="DateTime"
+								   Help="Implements FormInputDate with Min=-7 days Max=7 days"
+								   @bind-Value="editExample.Date1"
+								   Min="editExample.Date1.AddDays(-7)"
+								   Max="editExample.Date1.AddDays(7)"
+								   Step="1" />
 				</FormGroup>
-				<FormGroup Label="Example 7" class="col-4">
-					<FormInputTextBox Placeholder="Enter your name" Help="Enter 2 to 4 numbers. Uses RegularExpression attribute." @bind-Value="editExample.Example7" />
+				<FormGroup class="col-4" Label="Time 1">
+					<FormInputTime TValue="TimeSpan"
+								   Help="Implements FormInputTime with Min=9hrs Max=18hrs"
+								   @bind-Value="editExample.Time1"
+								   Min="TimeSpan.FromHours(9)"
+								   Max="TimeSpan.FromHours(18)" />
 				</FormGroup>
-				<FormGroup Label="Example 8" class="col-4">
-					<FormInputTextBox Placeholder="Enter your name" Help="This must match Example 7. Uses Compare attribute." @bind-Value="editExample.Example8" />
+
+				<FormGroup class="col-4"
+						   Label="DateTime1"
+						   Help="Read-only representation of Date1 and Time1">
+
+					@($"{editExample.DateTime1:o}")
 				</FormGroup>
 			</Row>
 
@@ -66,6 +79,9 @@
 			</Row>
 
 			<Row class="justify-content-center">
+				<ButtonGroup class="pr-4">
+					<Button IsOutline="true" Color="NamedColor.Secondary" OnClicked="@(e => editExample.ModelState = editExample.ModelState == ModelState.Edit ? ModelState.View : ModelState.Edit)">Toggle</Button>
+				</ButtonGroup>
 				<ButtonGroup>
 					<Button Color="NamedColor.Secondary">Cancel</Button>
 					<Button IsSubmit="true" Color="NamedColor.Primary">Submit</Button>
@@ -78,32 +94,26 @@
 		<Heading Level="HeadingLevel.H4">Form Model="viewExample" with ModelState = View</Heading>
 
 		<Form Model="viewExample">
-			<FormGroup Label="Example 1">
-				<FormInputTextBox Placeholder="Enter your name" @bind-Value="viewExample.Example1" />
-			</FormGroup>
-			<FormGroup Label="Example 2">
-				<FormInputTextBox Placeholder="Enter your name" Help="Uses Mode=TextBoxMode.MultiLine" @bind-Value="viewExample.Example2" Mode="TextBoxMode.MultiLine" Rows="3" />
+			<FormGroup Label="Name">
+				<FormInputTextBox Placeholder="No name" Help="This uses a textbox" @bind-Value="viewExample.Name" />
 			</FormGroup>
 			<Row>
-				<FormGroup class="col-4">
-					<FormInputTextBox Help="Example 3 labels are optional" @bind-Value="viewExample.Example3" />
+				<FormGroup class="col-8" Label="Title">
+					<FormInputTextBox Placeholder="No title" Help="This uses a textbox too. The edit control (left) is a select." @bind-Value="viewExample.Title" />
 				</FormGroup>
-				<FormGroup class="col-4">
-					<FormInputTextBox Help="Example 4 labels are optional" @bind-Value="viewExample.Example4" />
-				</FormGroup>
-				<FormGroup class="col-4">
-					<FormInputTextBox Help="Example 5 labels are optional" @bind-Value="viewExample.Example5" />
+				<FormGroup class="col-4" Help="This label is optional">
+					<FormInputCheckbox Label="Checkbox 1" @bind-Value="viewExample.Checkbox1" />
 				</FormGroup>
 			</Row>
 			<Row>
-				<FormGroup Label="Example 6 help is optional" class="col-4">
-					<FormInputTextBox @bind-Value="viewExample.Example6" />
+				<FormGroup class="col-4" Label="Date 1">
+					<FormInputDate Help="Implements FormInputDate" @bind-Value="viewExample.Date1" />
 				</FormGroup>
-				<FormGroup Label="Example 7 help is optional" class="col-4">
-					<FormInputTextBox @bind-Value="viewExample.Example7" />
+				<FormGroup class="col-4" Label="Time 1">
+					<FormInputTime Help="Implements FormInputTime" @bind-Value="viewExample.Time1" />
 				</FormGroup>
-				<FormGroup Label="Example 8 help is optional" class="col-4">
-					<FormInputTextBox @bind-Value="viewExample.Example8" />
+				<FormGroup class="col-4" Label="DateTime1" Help="Read-only representation of Date1 and Time1">
+					@($"{viewExample.DateTime1:o}")
 				</FormGroup>
 			</Row>
 		</Form>
@@ -112,18 +122,14 @@
 
 @code {
 
-	private Forms.Models.TextExample editExample = new Forms.Models.TextExample { ModelState = ModelState.Edit };
-	private Forms.Models.TextExample viewExample = new Forms.Models.TextExample { ModelState = ModelState.View };
+	private Forms.Models.CompleteExample editExample = new Forms.Models.CompleteExample { ModelState = ModelState.Edit };
+	private Forms.Models.CompleteExample viewExample = new Forms.Models.CompleteExample { ModelState = ModelState.View };
 
 	private void Submit_Click()
 	{
-		viewExample.Example1 = editExample.Example1;
-		viewExample.Example2 = editExample.Example2;
-		viewExample.Example3 = editExample.Example3;
-		viewExample.Example4 = editExample.Example4;
-		viewExample.Example5 = editExample.Example5;
-		viewExample.Example6 = editExample.Example6;
-		viewExample.Example7 = editExample.Example7;
-		viewExample.Example8 = editExample.Example8;
+		viewExample.Name = editExample.Name;
+		viewExample.Title = editExample.Title;
+		viewExample.DateTime1 = editExample.DateTime1;
+		viewExample.Checkbox1 = editExample.Checkbox1;
 	}
 }
