@@ -1,19 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.0-rc2</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
     <Authors>Mika Berglund</Authors>
     <Company>Blazorade</Company>
     <Product>Blazorade Bootstrap</Product>
     <Description>Blazorade Bootstrap is a Razor component library designed for Blazor applications that want to use Bootstrap as UI framework. The library makes using Bootstrap in your Blazor application much easier and simpler.</Description>
-    <PackageProjectUrl>https://github.com/Blazorade/Blazorade-Bootstrap/wiki</PackageProjectUrl>
+    <PackageProjectUrl>https://www.blazorade.com/Bootstrap</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Blazorade/Blazorade-Bootstrap</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Blazor, Bootstrap, Razor</PackageTags>
-    <PackageReleaseNotes>This is a preview release.</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
@@ -22,16 +29,36 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>Blazorade.Bootstrap.Components.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Blazorade.Bootstrap.Components.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Blazorade.Bootstrap.Components.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+  </ItemGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="Blazorade.Core" Version="1.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.6.3">
+    <PackageReference Include="Blazorade.Core" Version="1.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.8" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

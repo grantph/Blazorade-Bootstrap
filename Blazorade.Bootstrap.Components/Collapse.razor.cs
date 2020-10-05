@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace Blazorade.Bootstrap.Components
 {
+    /// <summary>
+    /// The <see cref="Collapse"/> component is used to toggle the visibility of content.
+    /// </summary>
     partial class Collapse
     {
-
 
         /// <summary>
         /// The callback that is triggered when the collapse is starting to show.
@@ -50,7 +52,7 @@ namespace Blazorade.Bootstrap.Components
         /// </summary>
         public async Task HideAsync()
         {
-            await this.JsInterop.Collapse().HideAsync(this.Id);
+            await this.JsInterop.InvokeVoidAsync(JsFunctions.Collapse.Hide, $"#{this.Id}");
         }
 
         /// <summary>
@@ -66,7 +68,7 @@ namespace Blazorade.Bootstrap.Components
         /// </summary>
         public async Task ShowAsync()
         {
-            await this.JsInterop.Collapse().ShowAsync(this.Id);
+            await this.JsInterop.InvokeVoidAsync(JsFunctions.Collapse.Show, $"#{this.Id}");
         }
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace Blazorade.Bootstrap.Components
         /// </summary>
         public async Task ToggleAsync()
         {
-            await this.JsInterop.Collapse().ToggleAsync(this.Id);
+            await this.JsInterop.InvokeVoidAsync(JsFunctions.Collapse.Toggle, $"#{this.Id}");
         }
 
 
@@ -124,6 +126,8 @@ namespace Blazorade.Bootstrap.Components
         }
 
 
+        /// <summary>
+        /// </summary>
         protected override void OnParametersSet()
         {
             this.AddClasses(ClassNames.Collapses.Collapse);
@@ -132,6 +136,8 @@ namespace Blazorade.Bootstrap.Components
             this.SetIdIfEmpty();
         }
 
+        /// <summary>
+        /// </summary>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
