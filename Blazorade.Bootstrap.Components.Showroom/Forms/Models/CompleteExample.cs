@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 using Blazorade.Bootstrap.Forms;
 
@@ -8,32 +9,32 @@ namespace Blazorade.Bootstrap.Components.Showroom.Forms.Models
 	{
 		public ModelState ModelState { get; set; } = ModelState.Edit;
 
-		public string Example1 { get; set; } = "Anything you want...";
+		[Required(ErrorMessage = "Name is required"), StringLength(40, MinimumLength = 2)]
+		public string Name { get; set; }
 
-		[Required(ErrorMessage = "Example 2 is required")]
-		public string Example2 { get; set; } = string.Empty;
+		[Required(ErrorMessage = "Title is required"), MinLength(2), MaxLength(10)]
+		public string Title { get; set; }
 
-		[MinLength(10, ErrorMessage = "Example 3 requires at least 10 characters")]
-		public string Example3 { get; set; } = "1234567";
+		public bool Checkbox1 { get; set; } = false;
 
-		[MaxLength(5, ErrorMessage = "Example 4 max 4 characters")]
-		public string Example4 { get; set; } = "1234567890";
+		public DateTime DateTime1 { get; set; } = DateTime.Now;
 
-		[StringLength(10, MinimumLength = 4, ErrorMessage = "Example 5 should have 4 to 10 characters")]
-		public string Example5 { get; set; } = "abc";
+		/// <summary>
+		/// Date1 maps to DateTime1
+		/// </summary>
+		public DateTime Date1
+		{
+			get => new DateTime(DateTime1.Year, DateTime1.Month, DateTime1.Day);
+			set => DateTime1 = new DateTime(value.Year, value.Month, value.Day, DateTime1.Hour, DateTime1.Minute, DateTime1.Second);
+		}
 
-		[MinLength(4, ErrorMessage = "Min 4 characters"), MaxLength(10), Required(ErrorMessage = "Example 6 is required")]
-		public string Example6 { get; set; }
-
-		[RegularExpression("\\d{2,4}", ErrorMessage = "Example 7 expects 2 to 4 numeric digits"), Required]
-		public string Example7 { get; set; } = "NNNN";
-
-		[Compare(nameof(Example7), ErrorMessage = "Example 8 must match Example 7")]
-		public string Example8 { get; set; } = "NN";
-
-		public short Example9 { get; set; }
-		public int Example10 { get; set; }
-		public long Example11 { get; set; }
-		public TextBoxType Example12 { get; set; } = TextBoxType.Email;
+		/// <summary>
+		/// Time1 maps to DateTime1
+		/// </summary>
+		public TimeSpan Time1
+		{
+			get => DateTime1.TimeOfDay;
+			set => DateTime1 = new DateTime(DateTime1.Year, DateTime1.Month, DateTime1.Day, value.Hours, value.Minutes, value.Seconds);
+		}
 	}
 }

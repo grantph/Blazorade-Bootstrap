@@ -200,7 +200,7 @@ namespace Blazorade.Bootstrap.Forms
 		/// <summary>
 		/// Formats the value as a string. Derived classes can override this to determine the formating used for <see cref="CurrentValueAsString"/>.
 		/// </summary>
-		/// <param name="value">The value to format.</param>
+		/// <param name=Html.VALUE>The value to format.</param>
 		/// <returns>A string representation of the value.</returns>
 		protected virtual string FormatValueAsString(TValue value) => value?.ToString();
 
@@ -208,7 +208,7 @@ namespace Blazorade.Bootstrap.Forms
 		/// Parses a string to create an instance of <typeparamref name="TValue"/>. Derived classes can override this to change how
 		/// <see cref="CurrentValueAsString"/> interprets incoming values.
 		/// </summary>
-		/// <param name="value">The string value to be parsed.</param>
+		/// <param name=Html.VALUE>The string value to be parsed.</param>
 		/// <param name="result">An instance of <typeparamref name="TValue"/>.</param>
 		/// <param name="validationErrorMessage">If the value could not be parsed, provides a validation error message.</param>
 		/// <returns>True if the value could be parsed; otherwise false.</returns>

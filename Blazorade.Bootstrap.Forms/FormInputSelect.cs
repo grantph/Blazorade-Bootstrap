@@ -35,7 +35,7 @@ namespace Blazorade.Bootstrap.Forms
 			if (HasLabel)
 			{
 				// <label>
-				builder.OpenElement(0, "label");
+				builder.OpenElement(0, Html.LABEL);
 				builder.AddAttribute(1, "for", Id);
 				builder.AddContent(2, Label);
 				builder.CloseElement();
@@ -56,7 +56,7 @@ namespace Blazorade.Bootstrap.Forms
 				builder.AddAttribute(6, Html.CLASS, Bootstrap.INPUT_GROUP_PREPEND);
 
 				// Span
-				builder.OpenElement(7, "span");
+				builder.OpenElement(7, Html.SPAN);
 				builder.AddAttribute(8, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(9, Prepend);
 				builder.CloseElement();
@@ -67,14 +67,14 @@ namespace Blazorade.Bootstrap.Forms
 			// Select
 			builder.OpenElement(10, "select");
 			builder.AddMultipleAttributes(11, Attributes);
-			builder.AddAttribute(12, "value", BindConverter.FormatValue(CurrentValueAsString));
-			builder.AddAttribute(13, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+			builder.AddAttribute(12, Html.VALUE, BindConverter.FormatValue(CurrentValueAsString));
+			builder.AddAttribute(13, Html.ONCHANGE, EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 
 			// Disabled?
-			if (Disabled ?? false) builder.AddAttribute(20, "disabled", string.Empty);
+			if (Disabled ?? false) builder.AddAttribute(20, Html.DISABLED, string.Empty);
 
 			// Help
-			if (HasHelp) builder.AddAttribute(21, "aria-describedby", $"{Id}-help");
+			if (HasHelp) builder.AddAttribute(21, Html.ARIA_DESCRIBEDBY, $"{Id}-help");
 
 			// Content
 			builder.AddContent(22, ChildContent);
@@ -88,7 +88,7 @@ namespace Blazorade.Bootstrap.Forms
 				builder.AddAttribute(24, Html.CLASS, "input-group-append");
 
 				// Span
-				builder.OpenElement(25, "span");
+				builder.OpenElement(25, Html.SPAN);
 				builder.AddAttribute(26, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(27, Append);
 				builder.CloseElement();
@@ -154,7 +154,7 @@ namespace Blazorade.Bootstrap.Forms
 		/// <summary>
 		/// Formats the value as a string. Derived classes can override this to determine the formating used for <c>CurrentValueAsString</c>.
 		/// </summary>
-		/// <param name="value">The value to format.</param>
+		/// <param name=Html.VALUE>The value to format.</param>
 		/// <returns>A string representation of the value.</returns>
 		protected override string FormatValueAsString(TValue value)
 		{

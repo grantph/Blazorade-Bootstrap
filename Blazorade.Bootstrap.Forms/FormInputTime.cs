@@ -26,12 +26,12 @@ namespace Blazorade.Bootstrap.Forms
 		[Parameter] public string ParsingErrorMessage { get; set; } = "The {0} field must be a time.";
 
 		/// <summary>
-		/// Minimum time in seconds.
+		/// Minimum time as TimeSpan (in seconds).
 		/// </summary>
 		[Parameter] public TimeSpan? Min { get; set; } = null;
 
 		/// <summary>
-		/// Maximum time in seconds.
+		/// Maximum time in TimeSpan (in seconds).
 		/// </summary>
 		[Parameter] public TimeSpan? Max { get; set; } = null;
 
@@ -65,7 +65,7 @@ namespace Blazorade.Bootstrap.Forms
 				builder.AddAttribute(3, Html.CLASS, Bootstrap.INPUT_GROUP_PREPEND);
 
 				// Span
-				builder.OpenElement(4, "span");
+				builder.OpenElement(4, Html.SPAN);
 				builder.AddAttribute(5, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(6, Prepend);
 				builder.CloseElement();
@@ -74,23 +74,23 @@ namespace Blazorade.Bootstrap.Forms
 			}
 
 			// Input
-			builder.OpenElement(10, "input");
+			builder.OpenElement(10, Html.INPUT);
 			builder.AddMultipleAttributes(11, Attributes);
-			builder.AddAttribute(12, "type", "time");
+			builder.AddAttribute(12, Html.TYPE, "time");
 			builder.AddAttribute(13, Html.CLASS, CssClass); // This will overwrite version in Attributes
-			builder.AddAttribute(14, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
-			builder.AddAttribute(15, "value", BindConverter.FormatValue(CurrentValueAsString));
+			builder.AddAttribute(14, Html.ONCHANGE, EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+			builder.AddAttribute(15, Html.VALUE, BindConverter.FormatValue(CurrentValueAsString));
 
 			// Disabled?
 			if (Disabled ?? false)
 			{
-				builder.AddAttribute(16, "disabled", string.Empty);
+				builder.AddAttribute(16, Html.DISABLED, string.Empty);
 			}
 
 			// Help
 			if (HasHelp)
 			{
-				builder.AddAttribute(17, "aria-describedby", $"{Id}-help");
+				builder.AddAttribute(17, Html.ARIA_DESCRIBEDBY, $"{Id}-help");
 			}
 
 			builder.CloseElement();
@@ -102,7 +102,7 @@ namespace Blazorade.Bootstrap.Forms
 				builder.AddAttribute(21, Html.CLASS, "input-group-append");
 
 				// Span
-				builder.OpenElement(22, "span");
+				builder.OpenElement(22, Html.SPAN);
 				builder.AddAttribute(23, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(24, Append);
 				builder.CloseElement();
@@ -125,7 +125,7 @@ namespace Blazorade.Bootstrap.Forms
 			switch (value)
 			{
 				case TimeSpan timeSpanValue:
-					return timeSpanValue.ToString(Format.Replace(":", "\\:").ToLower(), CultureInfo.InvariantCulture);
+					return timeSpanValue.ToString(Format.Replace(":", "\\:").ToLower(), CultureInfo.CurrentUICulture);
 
 				default:
 					return string.Empty; // Handles null for Nullable<DateTime>, etc.

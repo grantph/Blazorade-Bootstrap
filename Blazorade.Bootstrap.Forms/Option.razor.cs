@@ -12,7 +12,7 @@ namespace Blazorade.Bootstrap.Forms
 		{
 			if (!string.IsNullOrEmpty(Value))
 			{
-				AddAttribute("value", Value);
+				AddAttribute(Html.VALUE, Value);
 			}
 
 			if (Selected)

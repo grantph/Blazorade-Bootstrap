@@ -68,7 +68,7 @@ namespace Blazorade.Bootstrap.Forms
 				builder.AddAttribute(3, Html.CLASS, Bootstrap.INPUT_GROUP_PREPEND);
 
 				// Span
-				builder.OpenElement(4, "span");
+				builder.OpenElement(4, Html.SPAN);
 				builder.AddAttribute(5, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(6, Prepend);
 				builder.CloseElement();
@@ -77,18 +77,19 @@ namespace Blazorade.Bootstrap.Forms
 			}
 
 			// Input
-			builder.OpenElement(10, "input");
+			builder.OpenElement(10, Html.INPUT);
 			builder.AddMultipleAttributes(11, Attributes);
-			builder.AddAttribute(12, "type", "date");
+			builder.AddAttribute(12, Html.TYPE, Html.DATE);
 			builder.AddAttribute(13, Html.CLASS, CssClass); // Overwrite class in Attributes
-			builder.AddAttribute(14, "value", BindConverter.FormatValue(CurrentValueAsString));
-			builder.AddAttribute(15, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+			Console.WriteLine(CurrentValueAsString);
+			builder.AddAttribute(14, Html.VALUE, CurrentValueAsString);
+			builder.AddAttribute(15, Html.ONCHANGE, EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 
 			// Disabled?
-			if (Disabled ?? false) builder.AddAttribute(17, "disabled", string.Empty);
+			if (Disabled ?? false) builder.AddAttribute(17, Html.DISABLED, string.Empty);
 
 			// Help
-			if (HasHelp) builder.AddAttribute(18, "aria-describedby", $"{Id}-help");
+			if (HasHelp) builder.AddAttribute(18, Html.ARIA_DESCRIBEDBY, $"{Id}-help");
 
 			builder.CloseElement();
 
@@ -99,7 +100,7 @@ namespace Blazorade.Bootstrap.Forms
 				builder.AddAttribute(21, Html.CLASS, "input-group-append");
 
 				// Span
-				builder.OpenElement(22, "span");
+				builder.OpenElement(22, Html.SPAN);
 				builder.AddAttribute(23, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(24, Append);
 				builder.CloseElement();
@@ -122,10 +123,10 @@ namespace Blazorade.Bootstrap.Forms
 			switch (value)
 			{
 				case DateTime dateTimeValue:
-					return BindConverter.FormatValue(dateTimeValue, Format, CultureInfo.InvariantCulture);
+					return BindConverter.FormatValue(dateTimeValue, Format, CultureInfo.CurrentUICulture);
 
 				case DateTimeOffset dateTimeOffsetValue:
-					return BindConverter.FormatValue(dateTimeOffsetValue, Format, CultureInfo.InvariantCulture);
+					return BindConverter.FormatValue(dateTimeOffsetValue, Format, CultureInfo.CurrentUICulture);
 
 				default:
 					return string.Empty; // Handles null for Nullable<DateTime>, etc.
@@ -192,11 +193,20 @@ namespace Blazorade.Bootstrap.Forms
 			}
 		}
 
-		private const string FORMAT = "yyyy-MM-dd";
+		private const string ISO_FORMAT = "yyyy-MM-dd";
 
 		private static bool TryParseDateTime(string value, out TValue result)
 		{
-			var success = BindConverter.TryConvertToDateTime(value, CultureInfo.InvariantCulture, FORMAT, out var parsedValue);
+			// Try Culture format
+			var success = BindConverter.TryConvertToDateTime(value, CultureInfo.CurrentUICulture, out DateTime parsedValue);
+
+			// Success?
+			if (!success)
+			{
+				// Try ISO format
+				success = BindConverter.TryConvertToDateTime(value, CultureInfo.CurrentUICulture, ISO_FORMAT, out parsedValue);
+			}
+
 			if (success)
 			{
 				result = (TValue)(object)parsedValue;
@@ -211,7 +221,16 @@ namespace Blazorade.Bootstrap.Forms
 
 		private static bool TryParseDateTimeOffset(string value, out TValue result)
 		{
-			var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.InvariantCulture, FORMAT, out var parsedValue);
+			// Try Culture format
+			var success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.CurrentUICulture, out DateTimeOffset parsedValue);
+
+			// Success?
+			if (!success)
+			{
+				// Try ISO format
+				success = BindConverter.TryConvertToDateTimeOffset(value, CultureInfo.CurrentUICulture, ISO_FORMAT, out parsedValue);
+			}
+
 			if (success)
 			{
 				result = (TValue)(object)parsedValue;
@@ -230,8 +249,8 @@ namespace Blazorade.Bootstrap.Forms
 			if (HasLabel || HasHelp) this.SetIdIfEmpty();
 
 			// Min & Max?
-			if (Min.HasValue) AddAttribute("min", Min.Value.ToString("yyyy-MM-dd"));
-			if (Max.HasValue) AddAttribute("max", Max.Value.ToString("yyyy-MM-dd"));
+			if (Min.HasValue) AddAttribute("min", Min.Value.ToString(ISO_FORMAT));
+			if (Max.HasValue) AddAttribute("max", Max.Value.ToString(ISO_FORMAT));
 
 			// Step?
 			if (Step.HasValue) AddAttribute("step", Step.Value);    // step="any" could also be used for default.
