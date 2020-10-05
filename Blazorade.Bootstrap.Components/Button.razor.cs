@@ -34,16 +34,37 @@ namespace Blazorade.Bootstrap.Components
 		public bool IsDisabled { get; set; }
 
 		/// <summary>
+		/// Content to be displayed when IsDisabled is True. ChildContent will not be displayed at the same time.
+		/// </summary>
+		[Parameter]
+		public RenderFragment DisabledContent { get; set; }
+
+		/// <summary>
 		/// Specifies whether the button is styled as an outline button.
 		/// </summary>
 		[Parameter]
 		public bool IsOutline { get; set; }
+
+		private bool isProcessing = false;
+
+		/// <summary>
+		/// Specifies whether the button is processing and optionally show ProcessingContent (if it exists).
+		/// This also sets IsDisabled to the same state.
+		/// </summary>
+		[Parameter]
+		public bool IsProcessing { get => isProcessing; set => IsDisabled = isProcessing = value; }
 
 		/// <summary>
 		/// Specifies whether the button is a submit button. The default type is <c>button</c>.
 		/// </summary>
 		[Parameter]
 		public bool IsSubmit { get; set; }
+
+		/// <summary>
+		/// Content to be displayed when IsProcessing is True. ChildContent will not be displayed at the same time.
+		/// </summary>
+		[Parameter]
+		public RenderFragment ProcessingContent { get; set; }
 
 		/// <summary>
 		/// Specifies the size for the button.

@@ -57,19 +57,19 @@ namespace Blazorade.Bootstrap.Forms
 			if (HasInputGroup)
 			{
 				// Div
-				builder.OpenElement(0, "div");
-				builder.AddAttribute(1, "class", "input-group");
+				builder.OpenElement(0, Html.DIV);
+				builder.AddAttribute(1, Html.CLASS, Bootstrap.INPUT_GROUP);
 			}
 
 			if (HasPrepend)
 			{
 				// Div
-				builder.OpenElement(2, "div");
-				builder.AddAttribute(3, "class", "input-group-prepend");
+				builder.OpenElement(2, Html.DIV);
+				builder.AddAttribute(3, Html.CLASS, Bootstrap.INPUT_GROUP_PREPEND);
 
 				// Span
 				builder.OpenElement(4, "span");
-				builder.AddAttribute(5, "class", "input-group-text");
+				builder.AddAttribute(5, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(6, Prepend);
 				builder.CloseElement();
 
@@ -80,7 +80,7 @@ namespace Blazorade.Bootstrap.Forms
 			builder.OpenElement(10, "input");
 			builder.AddMultipleAttributes(11, Attributes);
 			builder.AddAttribute(12, "type", "date");
-			builder.AddAttribute(13, "class", CssClass); // Overwrite class in Attributes
+			builder.AddAttribute(13, Html.CLASS, CssClass); // Overwrite class in Attributes
 			builder.AddAttribute(14, "value", BindConverter.FormatValue(CurrentValueAsString));
 			builder.AddAttribute(15, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 
@@ -95,12 +95,12 @@ namespace Blazorade.Bootstrap.Forms
 			if (HasAppend)
 			{
 				// Div
-				builder.OpenElement(20, "div");
-				builder.AddAttribute(21, "class", "input-group-append");
+				builder.OpenElement(20, Html.DIV);
+				builder.AddAttribute(21, Html.CLASS, "input-group-append");
 
 				// Span
 				builder.OpenElement(22, "span");
-				builder.AddAttribute(23, "class", "input-group-text");
+				builder.AddAttribute(23, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(24, Append);
 				builder.CloseElement();
 

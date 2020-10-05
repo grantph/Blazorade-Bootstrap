@@ -33,40 +33,6 @@
 
 	window.blazoradeForms = {};
 
-	/// <summary>
-	/// TextBox JavaScript Interop methods.
-	/// </summary>
-	window.blazoradeForms.textBox = {
-		/// <summary>
-		/// Set the input value to string.Empty.
-		/// </summary>
-		clearValue: function (id) {
-			document.getElementById(id).value = "";
-
-			return true;
-		},
-
-		/// <summary>
-		/// Selects the input value.
-		/// </summary>
-		selectValue: function (id) {
-			var t = document.getElementById(id);
-
-			t.setSelectionRange(0, t.value.length);
-
-			return true;
-		},
-
-		/// <summary>
-		/// Updates the input value.
-		/// </summary>
-		updateValue: function (id, value) {
-			document.getElementById(id).value = value;
-
-			return true;
-		}
-	};
-
 	window.blazoradeForms.BlazorInputFile = {
 		init: function init(elem, componentInstance) {
 			elem._blazorInputFileNextFileId = 0;

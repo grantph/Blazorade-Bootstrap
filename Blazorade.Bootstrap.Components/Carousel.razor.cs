@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -59,7 +58,18 @@ namespace Blazorade.Bootstrap.Components
 		/// An array of URLs pointing to images to show in the carousel.
 		/// </summary>
 		[Parameter]
-		public IEnumerable<string> ImageUrls { get => imageUrls; set { imageUrls = value; StateHasChanged(); } }
+		public IEnumerable<string> ImageUrls
+		{
+			get => imageUrls;
+			set
+			{
+				// Whenever images change, re-initialize
+				this.RequiresInit = true;
+				imageUrls = value;
+
+				StateHasChanged();
+			}
+		}
 
 		private int _Interval = 5000;
 

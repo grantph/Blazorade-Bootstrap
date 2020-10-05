@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blazorade.Bootstrap.Components.Showroom\Blazorade.Bootstrap.Components.Showroom.csproj" />
-    <ProjectReference Include="..\Blazorade.Bootstrap.Components\Blazorade.Bootstrap.Components.csproj" />
   </ItemGroup>
 
   <Target Name="CustomActionsAfterPublish" AfterTargets="AfterPublish">

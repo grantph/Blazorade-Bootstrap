@@ -1,0 +1,132 @@
+﻿@code {
+
+	Spacing headingMarginTop = Spacing.S5;
+}
+
+<Heading Level="HeadingLevel.H2">FormInputText</Heading>
+<Paragraph>
+	Easily create different kinds of text boxes for a variety of purposes with the <code>FormInputText</code> component.
+</Paragraph>
+
+<DocsSection ComponentName="FormInputText" />
+
+<Heading Id="standard-buttons" IsAnchor="true" Level="HeadingLevel.H4" MarginTop="@headingMarginTop">FormInputText</Heading>
+<Paragraph>
+	Bootstrap buttons come in different styles for different semantic purposes.
+	See <Anchor Url="https://github.com/MikaBerglund/Blazor-Bootstrap/wiki/Button#basic-usage" OpenInNewTab="true">the wiki</Anchor> for sample code.
+</Paragraph>
+
+<Row class="pl-4 pr-4">
+	<Column class="col-12 col-md-6">
+
+		<Heading Level="HeadingLevel.H4">Form Model="editExample" with ModelState = Edit</Heading>
+
+		<Form Model="editExample" OnValidSubmit="Submit_Click">
+			<Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator />
+
+			<FormGroup Label="Example 1">
+				<FormInputText Placeholder="Enter your name" Help="This field is optional any length" @bind-Value="editExample.Example1" />
+			</FormGroup>
+			<FormGroup Label="Example 2">
+				<FormInputText Placeholder="Enter your name" Help="This field is mandatory any length" @bind-Value="editExample.Example2" />
+			</FormGroup>
+
+			<Row>
+				<FormGroup Label="Example 3" class="col-4">
+					<FormInputText Placeholder="Enter your name" Help="Enter at least 10 characters" @bind-Value="editExample.Example3" />
+				</FormGroup>
+
+				<FormGroup Label="Example 4" class="col-4">
+					<FormInputText Placeholder="Enter your name" Help="Enter no more than 5 characters" @bind-Value="editExample.Example4" />
+				</FormGroup>
+
+				<FormGroup Label="Example 5" class="col-4">
+					<FormInputText Placeholder="Enter your name" Help="Enter 4 to 10 characters. Uses StringLength attribute." @bind-Value="editExample.Example5" />
+				</FormGroup>
+			</Row>
+
+			<Row>
+				<FormGroup Label="Example 6" class="col-4">
+					<FormInputText Placeholder="Enter your name" Help="Enter 4 to 10 characters. Uses MinLength and MaxLength attributes." @bind-Value="editExample.Example6" />
+				</FormGroup>
+				<FormGroup Label="Example 7" class="col-4">
+					<FormInputText Placeholder="Enter your name" Help="Enter 2 to 4 numbers. Uses RegularExpression attribute." @bind-Value="editExample.Example7" />
+				</FormGroup>
+				<FormGroup Label="Example 8" class="col-4">
+					<FormInputText Placeholder="Enter your name" Help="This must match Example 7. Uses Compare attribute." @bind-Value="editExample.Example8" />
+				</FormGroup>
+			</Row>
+
+			<Row>
+				<Microsoft.AspNetCore.Components.Forms.ValidationSummary />
+			</Row>
+
+			<Row class="justify-content-center mb-3">
+				Submit to copy the values from left to right.
+			</Row>
+
+			<Row class="justify-content-center">
+				<ButtonGroup class="pr-4">
+					<Button IsOutline="true" Color="NamedColor.Secondary" OnClicked="@(e => editExample.ModelState = editExample.ModelState == ModelState.Edit ? ModelState.View : ModelState.Edit)">Toggle</Button>
+				</ButtonGroup>
+				<ButtonGroup>
+					<Button Color="NamedColor.Secondary">Cancel</Button>
+					<Button IsSubmit="true" Color="NamedColor.Primary">Submit</Button>
+				</ButtonGroup>
+			</Row>
+		</Form>
+	</Column>
+	<Column class="col-12 col-md-6">
+
+		<Heading Level="HeadingLevel.H4">Form Model="viewExample" with ModelState = View</Heading>
+
+		<Form Model="viewExample">
+			<FormGroup Label="Example 1">
+				<FormInputText Placeholder="Enter your name" @bind-Value="viewExample.Example1" />
+			</FormGroup>
+			<FormGroup Label="Example 2">
+				<FormInputText Placeholder="Enter your name" @bind-Value="viewExample.Example2" />
+			</FormGroup>
+			<Row>
+				<FormGroup class="col-4">
+					<FormInputText Help="Example 3 labels are optional" @bind-Value="viewExample.Example3" />
+				</FormGroup>
+				<FormGroup class="col-4">
+					<FormInputText Help="Example 4 labels are optional" @bind-Value="viewExample.Example4" />
+				</FormGroup>
+				<FormGroup class="col-4">
+					<FormInputText Help="Example 5 labels are optional" @bind-Value="viewExample.Example5" />
+				</FormGroup>
+			</Row>
+			<Row>
+				<FormGroup Label="Example 6 help is optional" class="col-4">
+					<FormInputText @bind-Value="viewExample.Example6" />
+				</FormGroup>
+				<FormGroup Label="Example 7 help is optional" class="col-4">
+					<FormInputText @bind-Value="viewExample.Example7" />
+				</FormGroup>
+				<FormGroup Label="Example 8 help is optional" class="col-4">
+					<FormInputText @bind-Value="viewExample.Example8" />
+				</FormGroup>
+			</Row>
+		</Form>
+	</Column>
+</Row>
+
+@code {
+
+	private Forms.Models.TextExample editExample = new Forms.Models.TextExample { ModelState = ModelState.Edit };
+	private Forms.Models.TextExample viewExample = new Forms.Models.TextExample { ModelState = ModelState.View };
+
+	private void Submit_Click()
+	{
+		viewExample.Example1 = editExample.Example1;
+		viewExample.Example2 = editExample.Example2;
+		viewExample.Example3 = editExample.Example3;
+		viewExample.Example4 = editExample.Example4;
+		viewExample.Example5 = editExample.Example5;
+		viewExample.Example6 = editExample.Example6;
+		viewExample.Example7 = editExample.Example7;
+		viewExample.Example8 = editExample.Example8;
+	}
+}

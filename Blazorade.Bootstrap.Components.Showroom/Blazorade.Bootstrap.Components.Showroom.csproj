@@ -12,5 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blazorade.Bootstrap.Components\Blazorade.Bootstrap.Components.csproj" />
+    <ProjectReference Include="..\Blazorade.Bootstrap.Forms\Blazorade.Bootstrap.Forms.csproj" />
   </ItemGroup>
 </Project>

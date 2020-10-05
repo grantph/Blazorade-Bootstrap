@@ -54,32 +54,6 @@ namespace Blazorade.Bootstrap.Forms
 			await this.OnBlur.InvokeAsync(this);
 		}
 
-		private async Task Input_OnClick()
-		{
-			if (ClearOnClick)
-			{
-				// Update Client-Side
-				await JSRuntime.InvokeAsync<bool>("blazoradeForms.textBox.clearValue", new object[] { Id });
-
-				// Update Server-Side
-				this.Value = string.Empty;
-			}
-			else if (SelectOnClick)
-			{
-				// Update Client-Side
-				await JSRuntime.InvokeAsync<bool>("blazoradeForms.textBox.selectValue", new object[] { Id });
-			}
-		}
-
-		private async Task Input_OnChange(ChangeEventArgs e)
-		{
-			// Update Client-Side
-			await JSRuntime.InvokeAsync<bool>("blazoradeForms.textBox.updateValue", new object[] { Id, e.Value });
-
-			// Server-Side Event
-			if (this.OnChange.HasDelegate) await this.OnChange.InvokeAsync(e);
-		}
-
 		protected override void OnParametersSet()
 		{
 			// Require Id?
@@ -110,7 +84,7 @@ namespace Blazorade.Bootstrap.Forms
 			{
 				AddAttribute("maxlength", MaxLength.Value.ToString());
 			}
-			else if (MaxLength.HasValue == false)
+			else if (!MaxLength.HasValue)
 			{
 				// No explicit MaxLength. So try MaxLengthAttribute.
 				var maxLengthAttribute = FieldIdentifier.Model.GetAttribute<MaxLengthAttribute>(FieldIdentifier.FieldName);

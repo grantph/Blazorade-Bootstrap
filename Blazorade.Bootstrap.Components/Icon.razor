@@ -1,0 +1,5 @@
+﻿@inherits Blazorade.Bootstrap.Components.BootstrapComponentBase
+
+<Anchor Clicked="@(async (e) => await this.Clicked.InvokeAsync(this))" TextColor="@TextColor" BackgroundColor="@BackgroundColor">
+	<i @attributes="Attributes" />
+</Anchor>

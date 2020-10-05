@@ -1,5 +1,16 @@
 ﻿@inherits ColoredBootstrapComponentBase
 
 <button @attributes="this.Attributes" @onclick="this.OnClickedAsync">
-    @this.ChildContent
+	@if (IsProcessing && this.ProcessingContent != null)
+	{
+		@this.ProcessingContent
+	}
+	else if (IsDisabled && this.DisabledContent != null)
+	{
+		@this.DisabledContent
+	}
+	else
+	{
+		@this.ChildContent
+	}
 </button>

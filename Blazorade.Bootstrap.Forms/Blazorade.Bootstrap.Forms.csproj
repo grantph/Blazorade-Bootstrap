@@ -14,10 +14,15 @@
 
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
+    <Content Remove="wwwroot\BlazoradeForms.BlazorInputFile.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\BlazoradeForms.BlazorInputFile.cs" />
   </ItemGroup>
 
   <ItemGroup>
