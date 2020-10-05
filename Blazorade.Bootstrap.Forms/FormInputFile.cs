@@ -55,11 +55,11 @@ namespace Blazorade.Bootstrap.Forms
 
 			// Input
 			// < input type = "file" @ref = "inputFileElement" @attributes = "UnmatchedParameters" />
-			builder.OpenElement(2, "input");
+			builder.OpenElement(2, Html.INPUT);
 			builder.AddMultipleAttributes(3, Attributes);
-			builder.AddAttribute(4, "type", "file");
+			builder.AddAttribute(4, Html.TYPE, "file");
 
-			//builder.AddAttribute(5, "onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, NotifyChange));
+			//builder.AddAttribute(5, Html.ONCHANGE, EventCallback.Factory.Create<ChangeEventArgs>(this, NotifyChange));
 
 			// Create an ElementReference suitable for use in JSInterop
 			builder.AddElementReferenceCapture(6, (__value) => inputFileElement = __value);
@@ -67,7 +67,7 @@ namespace Blazorade.Bootstrap.Forms
 			builder.CloseElement();
 
 			// Label
-			builder.OpenElement(10, "label");
+			builder.OpenElement(10, Html.LABEL);
 			builder.AddAttribute(11, Html.CLASS, ScreenReaderOnly ? "sr-only custom-file-label" : "custom-file-label");
 			builder.AddAttribute(12, "for", $"{Id}");
 			builder.AddContent(13, Label);
@@ -139,7 +139,7 @@ namespace Blazorade.Bootstrap.Forms
 			AddClasses("form-control-file");
 
 			// Prepend Reference
-			if (HasPrepend) AddAttribute("aria-describedby", $"{Id}-prepend");
+			if (HasPrepend) AddAttribute(Html.ARIA_DESCRIBEDBY, $"{Id}-prepend");
 
 			base.OnParametersSet();
 		}
@@ -147,7 +147,7 @@ namespace Blazorade.Bootstrap.Forms
 		/// <summary>
 		/// Always returns <see langword="true"/>.
 		/// </summary>
-		/// <param name="value"></param>
+		/// <param name=Html.VALUE></param>
 		/// <param name="result"></param>
 		/// <param name="validationErrorMessage"></param>
 		/// <returns></returns>

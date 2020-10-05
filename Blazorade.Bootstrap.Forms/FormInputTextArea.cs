@@ -30,22 +30,22 @@ namespace Blazorade.Bootstrap.Forms
 		/// <inheritdoc />
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			builder.OpenElement(0, "textarea");
+			builder.OpenElement(0, Html.TEXTAREA);
 			builder.AddMultipleAttributes(1, Attributes);
 			builder.AddAttribute(2, Html.CLASS, CssClass); // Overwrite class in Attributes
-			builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValue));
-			builder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+			builder.AddAttribute(3, Html.VALUE, BindConverter.FormatValue(CurrentValue));
+			builder.AddAttribute(4, Html.ONCHANGE, EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
 
 			// Disabled?
 			if (Disabled ?? false)
 			{
-				builder.AddAttribute(5, "disabled", string.Empty);
+				builder.AddAttribute(5, Html.DISABLED, string.Empty);
 			}
 
 			// Help
 			if (HasHelp)
 			{
-				builder.AddAttribute(6, "aria-describedby", $"{Id}-help");
+				builder.AddAttribute(6, Html.ARIA_DESCRIBEDBY, $"{Id}-help");
 			}
 
 			builder.CloseElement();

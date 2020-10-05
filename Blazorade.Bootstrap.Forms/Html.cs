@@ -5,6 +5,7 @@
 		public const string DIV = "div";
 		public const string INPUT = "input";
 		public const string LABEL = "label";
+		public const string SPAN = "span";
 		public const string TEXTAREA = "textarea";
 
 		public const string CLASS = "class";
@@ -18,6 +19,7 @@
 
 		public const string CHECKBOX = "checkbox";
 		public const string CHECKED = "checked";
+		public const string DATE = "date";
 
 		public const string ONBLUR = "onblur";
 		public const string ONCHANGE = "onchange";

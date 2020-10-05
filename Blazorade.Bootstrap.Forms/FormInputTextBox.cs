@@ -66,7 +66,7 @@ namespace Blazorade.Bootstrap.Forms
 				case TextBoxMode.SingleLine:
 					{
 						// Type
-						AddAttribute("type", Type.ToString().ToLower());
+						AddAttribute(Html.TYPE, Type.ToString().ToLower());
 					}
 					break;
 

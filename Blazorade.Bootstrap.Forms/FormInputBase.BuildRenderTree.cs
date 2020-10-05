@@ -15,7 +15,7 @@ namespace Blazorade.Bootstrap.Forms
 			builder.AddAttribute(101, Html.CLASS, "input-group-append");
 
 			// <span>
-			builder.OpenElement(102, "span");
+			builder.OpenElement(102, Html.SPAN);
 			builder.AddAttribute(103, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 			builder.AddContent(104, Append);
 			builder.CloseElement();
@@ -48,7 +48,7 @@ namespace Blazorade.Bootstrap.Forms
 			if (!HasLabel) return;
 
 			// <label>
-			builder.OpenElement(120, "label");
+			builder.OpenElement(120, Html.LABEL);
 			if (ScreenReaderOnly) builder.AddAttribute(121, Html.CLASS, "sr-only");
 			builder.AddAttribute(122, "for", Id);
 			builder.AddContent(123, Label);
@@ -69,7 +69,7 @@ namespace Blazorade.Bootstrap.Forms
 				builder.AddAttribute(134, Html.CLASS, "input-group-append");
 
 				// <span>
-				builder.OpenElement(135, "span");
+				builder.OpenElement(135, Html.SPAN);
 				builder.AddAttribute(136, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 				builder.AddContent(137, Append);
 				builder.CloseElement();
@@ -105,7 +105,7 @@ namespace Blazorade.Bootstrap.Forms
 			builder.AddAttribute(141, Html.CLASS, Bootstrap.INPUT_GROUP_PREPEND);
 
 			// <span>
-			builder.OpenElement(142, "span");
+			builder.OpenElement(142, Html.SPAN);
 			builder.AddAttribute(143, Html.CLASS, Bootstrap.INPUT_GROUP_TEXT);
 			builder.AddAttribute(144, "id", $"{Id}-prepend");
 			builder.AddContent(145, Prepend);
