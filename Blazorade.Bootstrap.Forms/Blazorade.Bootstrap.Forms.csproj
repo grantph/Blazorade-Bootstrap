@@ -10,6 +10,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <Authors>Grant Henderson</Authors>
+    <Company>Blazorade</Company>
+    <Product>Blazorade Bootstrap Forms</Product>
   </PropertyGroup>
 
   <ItemGroup>
