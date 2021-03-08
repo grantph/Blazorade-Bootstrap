@@ -54,7 +54,7 @@ namespace Blazorade.Bootstrap.Forms
 			builder.AddAttribute(1, Html.CLASS, "custom-file");
 
 			// Input
-			// < input type = "file" @ref = "inputFileElement" @attributes = "UnmatchedParameters" />
+			// <input type = "file" @ref = "inputFileElement" @attributes = "UnmatchedParameters" />
 			builder.OpenElement(2, Html.INPUT);
 			builder.AddMultipleAttributes(3, Attributes);
 			builder.AddAttribute(4, Html.TYPE, "file");
