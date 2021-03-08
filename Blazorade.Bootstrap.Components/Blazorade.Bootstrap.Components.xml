@@ -1260,14 +1260,30 @@
             Specifies whether the button is disabled.
             </summary>
         </member>
+        <member name="P:Blazorade.Bootstrap.Components.Button.DisabledContent">
+            <summary>
+            Content to be displayed when IsDisabled is True. ChildContent will not be displayed at the same time.
+            </summary>
+        </member>
         <member name="P:Blazorade.Bootstrap.Components.Button.IsOutline">
             <summary>
             Specifies whether the button is styled as an outline button.
             </summary>
         </member>
+        <member name="P:Blazorade.Bootstrap.Components.Button.IsProcessing">
+            <summary>
+            Specifies whether the button is processing and optionally show ProcessingContent (if it exists).
+            This also sets IsDisabled to the same state.
+            </summary>
+        </member>
         <member name="P:Blazorade.Bootstrap.Components.Button.IsSubmit">
             <summary>
             Specifies whether the button is a submit button. The default type is <c>button</c>.
+            </summary>
+        </member>
+        <member name="P:Blazorade.Bootstrap.Components.Button.ProcessingContent">
+            <summary>
+            Content to be displayed when IsProcessing is True. ChildContent will not be displayed at the same time.
             </summary>
         </member>
         <member name="P:Blazorade.Bootstrap.Components.Button.Size">
@@ -2692,6 +2708,77 @@
             <summary>
             Right alignment.
             </summary>
+        </member>
+        <member name="P:Blazorade.Bootstrap.Components.Icon.Version">
+            <summary>
+            Font Awesome version.
+            </summary>
+        </member>
+        <member name="P:Blazorade.Bootstrap.Components.Icon.Style">
+            <summary>
+            Font Awesome icon style.
+            </summary>
+        </member>
+        <member name="P:Blazorade.Bootstrap.Components.Icon.Type">
+            <summary>
+            Font Awesome icon type.
+            </summary>
+        </member>
+        <member name="P:Blazorade.Bootstrap.Components.Icon.Clicked">
+            <summary>
+            Callback for when the NavItem is clicked.
+            </summary>
+        </member>
+        <member name="P:Blazorade.Bootstrap.Components.Icon.IsSpinning">
+            <summary>
+            Enable spinning icon. Uses Css frame rendering.
+            </summary>
+        </member>
+        <member name="P:Blazorade.Bootstrap.Components.Icon.IconStyleClass">
+            <summary>
+            Convert style class names from Type to string.
+            </summary>
+        </member>
+        <member name="M:Blazorade.Bootstrap.Components.Icon.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="T:Blazorade.Bootstrap.Components.IconStyle">
+            <summary>
+            Font Awesome icon styles for Version 5.
+            </summary>
+            <seealso cref="!:https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use"/>
+        </member>
+        <member name="F:Blazorade.Bootstrap.Components.IconStyle.Solid">
+            <summary>
+            Solid. FREE.
+            </summary>
+        </member>
+        <member name="F:Blazorade.Bootstrap.Components.IconStyle.Regular">
+            <summary>
+            Regular. Requires PRO Font Awesome license.
+            </summary>
+        </member>
+        <member name="F:Blazorade.Bootstrap.Components.IconStyle.Light">
+            <summary>
+            Light. Requires PRO Font Awesome license.
+            </summary>
+        </member>
+        <member name="F:Blazorade.Bootstrap.Components.IconStyle.Duotone">
+            <summary>
+            Duotone. Requires PRO Font Awesome license.
+            </summary>
+        </member>
+        <member name="F:Blazorade.Bootstrap.Components.IconStyle.Brands">
+            <summary>
+            Brands. FREE - Brand paid Font Awesome to be included.
+            </summary>
+        </member>
+        <member name="T:Blazorade.Bootstrap.Components.IconType">
+            <summary>
+            Font Awesome icon types.
+            </summary>
+            <seealso href="https://fontawesome.com/icons?d=gallery"/>
+            <remarks>Please ensure the enum entries remain alphabetical.</remarks>
         </member>
         <member name="T:Blazorade.Bootstrap.Components.ImageBase">
             <summary>
