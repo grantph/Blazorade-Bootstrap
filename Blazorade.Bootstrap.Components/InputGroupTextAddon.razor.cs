@@ -5,18 +5,19 @@ using System.Text;
 namespace Blazorade.Bootstrap.Components
 {
     /// <summary>
-    /// The <c>Dropdown</c> component is a contextual overlay that displays a list of links and other elements. The <c>Dropdown</c> component can be toggled.
+    /// A simple text addon for <see cref="InputGroup"/> components.
     /// </summary>
-    public partial class Dropdown
+    /// <seealso cref="InputGroup"/>
+    partial class InputGroupTextAddon
     {
 
         /// <summary>
         /// </summary>
         protected override void OnParametersSet()
         {
-            this.AddClasses(ClassNames.Dropdowns.Dropdown);
-
             base.OnParametersSet();
+
+            this.AddClasses(ClassNames.InputGroups.Text);
         }
     }
 }
