@@ -1,21 +1,87 @@
-﻿<Navbar Id="MainMenu" BrandText="Blazorade Bootstrap" BrandUrl="./" BackgroundColor="NamedColor.Primary" ColorScheme="NavbarColor.Dark" ExpandAt="NavbarExpandBreakpoint.MD" Placement="NavbarPlacement.StickyTop">
-	<BrandTemplate>
-		<NavbarBrand Url="@context.Url">
-			<Span>@context.Text</Span>
-			<Span class="d-inline d-sm-none">(XS)</Span>
-			<Span class="d-none d-sm-inline d-md-none">(SM)</Span>
-			<Span class="d-none d-md-inline d-lg-none">(MD)</Span>
-			<Span class="d-none d-lg-inline d-xl-none">(LG)</Span>
-			<Span class="d-none d-xl-inline">(XL)</Span>
-		</NavbarBrand>
-	</BrandTemplate>
-	<ChildContent>
-		<NavbarNav Items="@this.items" />
-		<NavbarNav MarginLeft="Spacing.Auto">
-			<DropdownNavItem Text="Resources">
-				<DropdownItem Url="https://github.com/Blazorade/Blazorade-Bootstrap/wiki" OpenInNewTab="true">Wiki</DropdownItem>
-				<DropdownItem Url="https://www.nuget.org/packages/Blazorade.Bootstrap.Components/" OpenInNewTab="true">Nuget</DropdownItem>
-			</DropdownNavItem>
-		</NavbarNav>
-	</ChildContent>
+﻿
+@code {
+    List<MenuItem> items = new List<MenuItem>
+    {
+        new MenuItem
+        {
+            Text = "Layout",
+            Children = new List<MenuItem>
+            {
+                new MenuItem { Text = "Grid", Url = "grid", Description = "Use the powerful grid system to build mobile-first layouts of all shapes and sizes." },
+            }
+        },
+        new MenuItem
+        {
+            Text = "Content",
+            Children = new List<MenuItem>
+            {
+                new MenuItem { Text = "Typography", Url = "typography", Description = "Support for typography in Bootstrap."}
+            }
+        },
+        new MenuItem
+        {
+            Text = "Components",
+            Children = new List<MenuItem>
+            {
+                new MenuItem { Text = "Alerts", Url = "alerts", Description = "The Alert component is used to provide feedback messages, typically in response to user actions." },
+                new MenuItem { Text = "Badges", Url = "badges", Description = "The Badge component is used to add counts and labels to other components." },
+                new MenuItem { Text = "Breadcrumbs", Url = "breadcrumbs", Description = "The Breadcrumb component visualizes the current page in a navigational hierarchy." },
+                new MenuItem { Text = "Buttons", Url = "buttons", Description = "The Button component in Bootstrap is probably one of the most vertsatile component, since it is used for so many things, from forms and dialogs to custom navigation etc." },
+                new MenuItem { Text = "Cards", Url = "cards", Description = "The Card component is a flexible container with lots of variants." },
+                new MenuItem { Text = "Carousels", Url = "carousels", Description = "A slideshow component for cycling through elements with virtually any kind of content." },
+                new MenuItem { Text = "Collapses", Url = "collapses", Description = "The Collapse component is used to toggle the visibility of content." },
+                new MenuItem { Text = "Containers", Url = "containers", Description = "The Container component is the foundation for many layout configurations in Bootstrap." },
+                new MenuItem { Text = "Dropdowns", Url = "dropdowns", Description = "The Dropdown component is a contextual overlay that displays a list of links and other elements. The Dropdown can be toggled." },
+                new MenuItem { Text = "Embeds", Url = "embeds", Description = "The Embed component is used to create responsive video or slideshow embeds." },
+                new MenuItem { Text = "Input Groups", Url = "inputgroups", Description = "Easily extend form controls by adding text, buttons, or button groups on either side of textual inputs, custom selects, and custom file inputs." },
+                new MenuItem { Text = "Jumbotrons", Url = "jumbotrons", Description = "The Jumbotron component is a lightweight and flexible component for showcasing content." },
+                new MenuItem { Text = "List Groups", Url = "listgroups", Description = "The ListGroup component is used to display a series of content in a powerful and flexible way." },
+                new MenuItem { Text = "Media", Url = "media", Description = "The Media component is used to build complex and repetitive content where media is positioned alongside content." },
+                new MenuItem { Text = "Modals", Url = "modals", Description = "Use the Modal component to add dialogs to your site or application for lightboxes, user notifications or other kinds of custom content." },
+                new MenuItem { Text = "Navbars", Url = "navbars", Description = "The Navbar component is used to produce a responsive navigation header with built-in support for collapsing." },
+                new MenuItem { Text = "Navs", Url = "navs", Description = "The Nav component provides a simple way to build navigation elements." },
+                new MenuItem { Text = "Paginations", Url = "paginations", Description = "The Pagination component is used to create pagination to indicate that a series of related content exists across multiple pages." },
+                new MenuItem { Text = "Progress Bars", Url = "progressbars", Description = "The Progress component is used to display progress bars, including stacked bars, animated backgrounds, and text labels." },
+                new MenuItem { Text = "Spinners", Url = "spinners", Description = "The Spinner component is used to indicate a loading state of a UI element or page." },
+                new MenuItem { Text = "Toasts", Url = "toasts", Description = "The Toast component is used to push notifications to your visitor as a lighweight and customizable alert message." },
+            }
+        },
+        new MenuItem
+        {
+            Text = "Utilities",
+            Children = new List<MenuItem>
+            {
+                new MenuItem { Text = "Sizing", Url = "sizing", Description = "The sizing utility makes it easy to make components equally wide or high." },
+                new MenuItem { Text = "Tooltips", Url = "tooltips", Description = "Tooltips allow you to add additional information to any component." }
+            }
+        },
+        new MenuItem
+        {
+            Text = "Work in Progress",
+            Children = new List<MenuItem>
+            {
+            }
+        }
+    };
+}
+<Navbar Id="MainMenu" BrandText="Blazorade Bootstrap" BrandUrl="./" BackgroundColor="NamedColor.Primary" ColorScheme="NavbarColor.Dark" ExpandAt="NavbarExpandBreakpoint.MD" Placement="NavbarPlacement.StickyTop">
+    <BrandTemplate>
+        <NavbarBrand Url="@context.Url">
+            <Span>@context.Text</Span>
+            <Span class="d-inline d-sm-none">(XS)</Span>
+            <Span class="d-none d-sm-inline d-md-none">(SM)</Span>
+            <Span class="d-none d-md-inline d-lg-none">(MD)</Span>
+            <Span class="d-none d-lg-inline d-xl-none">(LG)</Span>
+            <Span class="d-none d-xl-inline">(XL)</Span>
+        </NavbarBrand>
+    </BrandTemplate>
+    <ChildContent>
+        <NavbarNav Items="@this.items" />
+        <NavbarNav MarginLeft="Spacing.Auto">
+            <DropdownNavItem Text="Resources">
+                <DropdownItem Url="https://github.com/Blazorade/Blazorade-Bootstrap/wiki" OpenInNewTab="true">Wiki</DropdownItem>
+                <DropdownItem Url="https://www.nuget.org/packages/Blazorade.Bootstrap.Components/" OpenInNewTab="true">Nuget</DropdownItem>
+            </DropdownNavItem>
+        </NavbarNav>
+    </ChildContent>
 </Navbar>

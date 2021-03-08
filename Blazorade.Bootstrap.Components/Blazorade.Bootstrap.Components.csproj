@@ -1,17 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup Label="Globals">
-    <SccProjectName></SccProjectName>
-    <SccProvider></SccProvider>
-    <SccAuxPath></SccAuxPath>
-    <SccLocalPath></SccLocalPath>
-  </PropertyGroup>
-
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.2</Version>
     <Authors>Mika Berglund</Authors>
     <Company>Blazorade</Company>
     <Product>Blazorade Bootstrap</Product>
@@ -21,7 +14,8 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Blazor, Bootstrap, Razor</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>Blazorade-Icon-128.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -29,36 +23,28 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>Blazorade.Bootstrap.Components.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="bundleconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Blazorade.Bootstrap.Components.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="bundleconfig.json" />
+    <None Include="wwwroot\Blazorade-Icon-128.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Blazorade.Bootstrap.Components.xml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="bundleconfig.json" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Blazorade.Core" Version="1.4.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="3.1.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.8" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.0.2">
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.6.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
