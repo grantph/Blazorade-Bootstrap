@@ -33,6 +33,19 @@
 
 	window.blazoradeForms = {};
 
+	window.blazoradeForms.TextBox = {
+		init: function (elem, componentInstance) {
+			elem.addEventListener('paste', function onPaste(event) {
+				// Get pasted text
+				var pasteText = (event.clipboardData || window.clipboardData).getData('text');
+				// Send to C#
+				componentInstance.invokeMethodAsync('NotifyPasteAsync', pasteText);
+				// Prevent Paste. Was finished in C#.
+				event.preventDefault();
+			});
+		}
+	};
+
 	window.blazoradeForms.BlazorInputFile = {
 		init: function init(elem, componentInstance) {
 			elem._blazorInputFileNextFileId = 0;
