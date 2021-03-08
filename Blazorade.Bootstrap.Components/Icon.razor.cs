@@ -97,6 +97,7 @@ namespace Blazorade.Bootstrap.Components
 
 				IconType.Cog => "fa-cog",
 				IconType.Compass => "fa-compass",
+				IconType.CommentDots => "fa-comment-dots",
 
 				IconType.Download => "fa-download",
 
@@ -104,6 +105,9 @@ namespace Blazorade.Bootstrap.Components
 				IconType.FastForward => "fa-fast-forward",
 
 				IconType.Forward => "fa-forward",
+
+				IconType.Info => "fa-info",
+				IconType.InfoCircle => "fa-info-circle",
 
 				IconType.Minus => "fa-minus",
 				IconType.MinusCircle => "fa-minus-circle",
@@ -122,6 +126,9 @@ namespace Blazorade.Bootstrap.Components
 				IconType.PlusCircle => "fa-plus-circle",
 				IconType.PlusSquare => "fa-plus-square",
 				IconType.PlusSquareOpen => "fa-plus-square-o",
+
+				IconType.Question => "fa-question",
+				IconType.QuestionCircle => "fa-question-circle",
 
 				IconType.Search => "fa-search",
 

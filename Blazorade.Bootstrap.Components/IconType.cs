@@ -35,10 +35,11 @@
 	/// <summary>
 	/// Font Awesome icon types.
 	/// </summary>
-	/// <seealso cref="https://fontawesome.com/icons?d=gallery"/>
+	/// <seealso href="https://fontawesome.com/icons?d=gallery"/>
 	/// <remarks>Please ensure the enum entries remain alphabetical.</remarks>
 	public enum IconType
 	{
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 		ArrowDown,
 		ArrowLeft,
 		ArrowRight,
@@ -76,6 +77,7 @@
 
 		Cog,
 		Compass,
+		CommentDots,
 
 		Download,
 
@@ -83,6 +85,9 @@
 		FastForward,
 
 		Forward,
+
+		Info,
+		InfoCircle,
 
 		Minus,
 		MinusCircle,
@@ -101,6 +106,9 @@
 		PlusCircle,
 		PlusSquare,
 		PlusSquareOpen,
+
+		Question,
+		QuestionCircle,
 
 		Search,
 
@@ -136,5 +144,6 @@
 		TrashOpen,
 
 		Upload,
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 	}
 }
