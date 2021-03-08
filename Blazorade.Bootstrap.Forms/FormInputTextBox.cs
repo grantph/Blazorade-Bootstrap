@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
@@ -6,6 +7,12 @@ using Microsoft.JSInterop;
 
 namespace Blazorade.Bootstrap.Forms
 {
+	public class PasteEventArgs : EventArgs
+	{
+		public string PasteText { get; set; } = string.Empty;
+		public bool Cancel { get; set; } = false;
+	}
+
 	/// <summary>
 	/// Combines input type=text and textarea into a single control.
 	/// </summary>
@@ -37,6 +44,27 @@ namespace Blazorade.Bootstrap.Forms
 		[Parameter]
 		public int? MaxLength { get; set; } = null;
 
+		/// <summary>
+		/// Called by Javascript when the 'paste' event is fired.
+		/// </summary>
+		/// <param name="pasteText"></param>
+		/// <returns></returns>
+		[JSInvokable]
+		public async Task NotifyPasteAsync(string pasteText)
+		{
+			// OnPaste configured?
+			if (OnPaste.HasDelegate)
+			{
+				// Call OnPaste
+				await OnPaste.InvokeAsync(pasteText);
+
+				return;
+			}
+
+			// Default Paste. Necessary because we disabled Paste in Javascript window.blazoradeForms.TextBox.init()
+			Value = pasteText;
+		}
+
 		[Parameter]
 		public bool ClearOnClick { get; set; } = false;
 
@@ -51,8 +79,28 @@ namespace Blazorade.Bootstrap.Forms
 
 		protected virtual async Task OnBlurAsync()
 		{
-			await this.OnBlur.InvokeAsync(this);
+			if (OnBlur.HasDelegate)
+			{
+				await this.OnBlur.InvokeAsync(this);
+			}
 		}
+
+		[Parameter]
+		public EventCallback OnFocus { get; set; }
+
+		protected virtual async Task OnFocusAsync()
+		{
+			if (OnFocus.HasDelegate)
+			{
+				await this.OnFocus.InvokeAsync(this);
+			}
+		}
+
+		/// <summary>
+		/// Called when the user pastes into the TextBox. Occurs immediately before the value is pasted.
+		/// </summary>
+		[Parameter]
+		public EventCallback<string> OnPaste { get; set; }
 
 		protected override void OnParametersSet()
 		{
@@ -112,6 +160,40 @@ namespace Blazorade.Bootstrap.Forms
 
 			// Success
 			return true;
+		}
+
+		private ElementReference inputElement;
+		private IDisposable thisReference;
+		private bool disposedValue;
+
+		protected override async Task OnAfterRenderAsync(bool firstRender)
+		{
+			if (firstRender)
+			{
+				thisReference = DotNetObjectReference.Create(this);
+				await JSRuntime.TextBox_Init(inputElement, thisReference);
+			}
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposedValue)
+			{
+				if (disposing)
+				{
+					// Dispose managed state (managed objects)
+					thisReference?.Dispose();
+				}
+
+				disposedValue = true;
+			}
+		}
+
+		public void Dispose()
+		{
+			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+			Dispose(disposing: true);
+			GC.SuppressFinalize(this);
 		}
 	}
 }

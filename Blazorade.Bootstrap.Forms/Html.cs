@@ -24,6 +24,8 @@
 		public const string ONBLUR = "onblur";
 		public const string ONCHANGE = "onchange";
 		public const string ONCLICK = "onclick";
+		public const string ONFOCUS = "onfocus";
+		public const string ONPASTE = "onpaste";
 
 		public const string ARIA_DESCRIBEDBY = "aria-describedby";
 	}
