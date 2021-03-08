@@ -31,7 +31,7 @@ namespace Blazorade.Bootstrap.Forms.File
 		protected override async Task<int> CopyFileDataIntoBuffer(long sourceOffset, byte[] destination, int destinationOffset, int maxBytes, CancellationToken cancellationToken)
 		{
 			await _jsRuntime.InvokeAsync<string>(
-				"BlazorInputFile.ensureArrayBufferReadyForSharedMemoryInterop",
+				"blazoradeForms.BlazorInputFile.ensureArrayBufferReadyForSharedMemoryInterop",
 				cancellationToken,
 				_inputFileElement,
 				_file.Id);
@@ -39,7 +39,7 @@ namespace Blazorade.Bootstrap.Forms.File
 			var methodInfo = GetCachedInvokeUnmarshalledMethodInfo();
 			return (int)methodInfo.Invoke(_jsRuntime, new object[]
 			{
-				"BlazorInputFile.readFileDataSharedMemory",
+				"blazoradeForms.BlazorInputFile.readFileDataSharedMemory",
 				new ReadRequest
 				{
 					InputFileElementReferenceId = _inputFileElement.Id,

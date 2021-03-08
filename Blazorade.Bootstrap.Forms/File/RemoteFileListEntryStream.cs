@@ -92,7 +92,7 @@ namespace Blazorade.Bootstrap.Forms.File
 			var sourceOffset = index * _maxMessageSize;
 			var blockLength = (int)Math.Min(_maxMessageSize, _file.Size - sourceOffset);
 			var task = _jsRuntime.InvokeAsync<string>(
-				"BlazorInputFile.readFileData",
+				"blazoradeForms.BlazorInputFile.readFileData",
 				cancellationToken,
 				_inputFileElement,
 				_file.Id,
