@@ -48,9 +48,9 @@ namespace Blazorade.Bootstrap.Forms
 		/// Called by Javascript when the 'paste' event is fired.
 		/// </summary>
 		/// <param name="pasteText"></param>
-		/// <returns></returns>
+		/// <returns>True when default paste behavior should be prevented</returns>
 		[JSInvokable]
-		public async Task NotifyPasteAsync(string pasteText)
+		public async Task<bool> NotifyPasteAsync(string pasteText)
 		{
 			// OnPaste configured?
 			if (OnPaste.HasDelegate)
@@ -58,11 +58,10 @@ namespace Blazorade.Bootstrap.Forms
 				// Call OnPaste
 				await OnPaste.InvokeAsync(pasteText);
 
-				return;
+				return true;
 			}
 
-			// Default Paste. Necessary because we disabled Paste in Javascript window.blazoradeForms.TextBox.init()
-			Value = pasteText;
+			return false;
 		}
 
 		[Parameter]
