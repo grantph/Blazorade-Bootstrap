@@ -1398,30 +1398,14 @@
             Specifies whether the button is disabled.
             </summary>
         </member>
-        <member name="P:Blazorade.Bootstrap.Components.Button.DisabledContent">
-            <summary>
-            Content to be displayed when IsDisabled is True. ChildContent will not be displayed at the same time.
-            </summary>
-        </member>
         <member name="P:Blazorade.Bootstrap.Components.Button.IsOutline">
             <summary>
             Specifies whether the button is styled as an outline button.
             </summary>
         </member>
-        <member name="P:Blazorade.Bootstrap.Components.Button.IsProcessing">
-            <summary>
-            Specifies whether the button is processing and optionally show ProcessingContent (if it exists).
-            This also sets IsDisabled to the same state.
-            </summary>
-        </member>
         <member name="P:Blazorade.Bootstrap.Components.Button.IsSubmit">
             <summary>
             Specifies whether the button is a submit button. The default type is <c>button</c>.
-            </summary>
-        </member>
-        <member name="P:Blazorade.Bootstrap.Components.Button.ProcessingContent">
-            <summary>
-            Content to be displayed when IsProcessing is True. ChildContent will not be displayed at the same time.
             </summary>
         </member>
         <member name="P:Blazorade.Bootstrap.Components.Button.Size">
